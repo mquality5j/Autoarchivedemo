@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>AutoArchive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1f3b6d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .search-box button {
+      padding: 10px 15px;
+      background-color: #1f3b6d;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .car {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+    }
+    .car img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .vin { font-weight: bold; }
+    .info { margin: 5px 0; }
+    .logo {
+      display: block;
+      margin: 0 auto 15px;
+      max-width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="IMG_1421.png" alt="AutoArchive Logo" class="logo">
+    <h1>AutoArchive</h1>
+    <p>Wyszukaj historię pojazdu po numerze VIN</p>
+  </header>
 
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="vinInput" placeholder="Wpisz VIN...">
+      <button onclick="searchVIN()">Szukaj</button>
+    </div>
+    <div id="carList"></div>
+  </div>
+
+  <script>
+    const cars = [
+      {
+        vin: "1HGCM82633A004352",
+        model: "Honda Accord 2003",
+        img: "car1.jpg",
+        price: "$1,500",
+        location: "Texas, Houston",
+        damage: "Front End",
+        title: "Salvage"
+      },
+      {
+        vin: "1C4RJFBG0FC625797",
+        model: "Jeep Grand Cherokee 2015",
+        img: "car2.jpg",
+        price: "$7,200",
+        location: "California, Los Angeles",
+        damage: "Rear End",
+        title: "Clean"
+      },
+      {
+        vin: "WDBUF56X78B278934",
+        model: "Mercedes E350 2008",
+        img: "car3.jpg",
+        price: "$4,300",
+        location: "Florida, Miami",
+        damage: "Side",
+        title: "Salvage"
+      },
+      {
+        vin: "3FA6P0H71ER239845",
+        model: "Ford Fusion 2014",
+        img: "car4.jpg",
+        price: "$3,900",
+        location: "New York, Buffalo",
+        damage: "Minor Dents",
+        title: "Clean"
+      },
+      {
+        vin: "5NPE24AF4FH040493",
+        model: "Hyundai Sonata 2015",
+        img: "car5.jpg",
+        price: "$3,200",
+        location: "Nevada, Las Vegas",
+        damage: "Undercarriage",
+        title: "Salvage"
+      }
+    ];
+
+    const carList = document.getElementById("carList");
+
+    function renderCars(filter = "") {
+      carList.innerHTML = "";
+      cars
+        .filter(car => car.vin.includes(filter.toUpperCase()))
+        .forEach(car => {
+          const el = document.createElement("div");
+          el.className = "car";
+          el.innerHTML = `
+            <div class="vin">VIN: ${car.vin}</div>
+            <div class="info"><strong>Model:</strong> ${car.model}</div>
+            <div class="info"><strong>Cena:</strong> ${car.price}</div>
+            <div class="info"><strong>Miejsce zakupu:</strong> ${car.location}</div>
+            <div class="info"><strong>Uszkodzenia:</strong> ${car.damage}</div>
+            <div class="info"><strong>Tytuł:</strong> ${car.title}</div>
+            <img src="${car.img}" alt="Zdjęcie auta">
+          `;
+          carList.appendChild(el);
+        });
+    }
+
+    function searchVIN() {
+      const value = document.getElementById("vinInput").value;
+      renderCars(value);
+    }
+
+    renderCars();
+  </script>
+</body>
+</html>
