@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoArchive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+        header { background: #1f3b6d; color: white; padding: 20px; text-align: center; }
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        .search input { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
+        .car { background: white; padding: 15px; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .car img { max-width: 100%; height: auto; border-radius: 4px; margin-top: 10px; }
+        .vin { font-weight: bold; margin-bottom: 5px; }
+        .remove-btn { background: #d11a2a; color: white; padding: 8px 12px; border: none; margin-top: 10px; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AutoArchive</h1>
+        <p>Wyszukaj historię pojazdu po numerze VIN</p>
+    </header>
+    <div class="container">
+        <input type="text" id="vinInput" placeholder="Wpisz VIN..." onkeyup="searchVIN()">
+        <div id="carList"></div>
+    </div>
+
+    <script>
+        const cars = [
+            { vin: "1HGCM82633A004352", model: "Honda Accord 2003", img: "https://via.placeholder.com/800x400?text=Honda+Accord" },
+            { vin: "1C4RJFBG0FC625797", model: "Jeep Grand Cherokee 2015", img: "https://via.placeholder.com/800x400?text=Jeep+Grand+Cherokee" },
+            { vin: "WDBUF56X78B278934", model: "Mercedes E350 2008", img: "https://via.placeholder.com/800x400?text=Mercedes+E350" },
+            { vin: "3FA6P0H71ER239845", model: "Ford Fusion 2014", img: "https://via.placeholder.com/800x400?text=Ford+Fusion" },
+            { vin: "5NPE24AF4FH040493", model: "Hyundai Sonata 2015", img: "https://via.placeholder.com/800x400?text=Hyundai+Sonata" }
+        ];
+
+        const carList = document.getElementById("carList");
+
+        function renderCars(filter = "") {
+            carList.innerHTML = "";
+            cars.filter(car => car.vin.includes(filter.toUpperCase()))
+                .forEach(car => {
+                    const el = document.createElement("div");
+                    el.className = "car";
+                    el.innerHTML = `
+                        <div class="vin">VIN: ${car.vin}</div>
+                        <div>${car.model}</div>
+                        <img src="${car.img}" alt="Zdjęcie auta">
+                        <button class="remove-btn" onclick="alert('Wpis zostałby usunięty po płatności')">Usuń wpis</button>
+                    `;
+                    carList.appendChild(el);
+                });
+        }
+
+        function searchVIN() {
+            const value = document.getElementById("vinInput").value;
+            renderCars(value);
+        }
+
+        renderCars();
+    </script>
+</body>
+</html>
