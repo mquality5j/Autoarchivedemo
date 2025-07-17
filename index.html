@@ -29,6 +29,10 @@
       margin: 0;
       font-size: 24px;
     }
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
     nav a {
       color: white;
       margin-left: 15px;
@@ -72,6 +76,18 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .search-box {
+      margin-top: 20px;
+    }
+    .search-box input {
+      padding: 8px;
+      width: 250px;
+    }
+    .search-box button {
+      padding: 8px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
     @media (max-width: 600px) {
       .car-entry {
         flex-direction: column;
@@ -85,7 +101,7 @@
 </head>
 <body>
   <header>
-    <h1>AutoArchive</h1>
+    <h1><a href="index.html">AutoArchive</a></h1>
     <nav>
       <a href="#">🏠 <span class="tr" data-key="home">Strona główna</span></a>
       <a href="#">ℹ️ <span class="tr" data-key="about">O nas</span></a>
@@ -102,6 +118,11 @@
   </header>
 
   <div class="container">
+    <div class="search-box">
+      <input type="text" id="vinInput" placeholder="Wpisz VIN...">
+      <button onclick="searchVIN()">🔍 <span class="tr" data-key="search">Szukaj VIN</span></button>
+    </div>
+
     <div class="car-entry">
       <img src="car1_thumb.jpg" alt="BMW 530xi">
       <div>
@@ -149,13 +170,30 @@
         const key = el.dataset.key;
         el.textContent = translations[lang][key];
       });
+      localStorage.setItem("lang", lang);
     }
 
     function toggleDark() {
       document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      localStorage.setItem("darkMode", isDark ? "true" : "false");
     }
 
-    setLanguage("pl");
+    function searchVIN() {
+      const vin = document.getElementById("vinInput").value.trim().toUpperCase();
+      if (vin === "WBAFU7C59BC861936") {
+        window.location.href = "car_1.html";
+      } else {
+        alert("Nie znaleziono pojazdu o tym VIN.");
+      }
+    }
+
+    // Load language and dark mode from localStorage
+    const savedLang = localStorage.getItem("lang") || "pl";
+    setLanguage(savedLang);
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark");
+    }
   </script>
 </body>
 </html>
