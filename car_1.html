@@ -2,19 +2,18 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>AutoArchive - BMW 530xi</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW 530xi – AutoArchive</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #f4f4f4;
     }
     header {
       background-color: #1f3b6d;
       color: white;
-      padding: 20px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -23,118 +22,126 @@
       height: 40px;
       cursor: pointer;
     }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
     }
     .container {
-      padding: 20px;
       max-width: 1000px;
-      margin: auto;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .car-images {
+    h1 {
+      margin-top: 0;
+    }
+    .gallery {
       display: flex;
+      gap: 15px;
       flex-wrap: wrap;
-      gap: 10px;
       margin-bottom: 20px;
     }
-    .car-images img {
-      max-width: 100%;
-      width: calc(50% - 10px);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    .gallery img {
+      width: 32%;
+      border-radius: 4px;
+      object-fit: cover;
     }
-    .info {
-      margin-bottom: 20px;
+    .details {
+      line-height: 1.7;
     }
-    .info p {
-      margin: 6px 0;
+    .details span {
+      font-weight: bold;
     }
     .remove-btn {
-      background-color: #d11a2a;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #e63946;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
+      font-size: 16px;
       cursor: pointer;
-      font-weight: bold;
     }
     .payment-modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
-      z-index: 9999;
     }
-    .payment-content {
-      background-color: white;
+    .payment-box {
+      background: white;
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 6px;
       text-align: center;
+      width: 300px;
     }
-    .payment-content h2 {
-      margin-bottom: 20px;
-    }
-    .payment-content button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #1f3b6d;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    .footer {
+      text-align: center;
+      color: #777;
+      padding: 20px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="IMG_1421.png" alt="Logo AutoArchive" onclick="window.location.href='index.html'" />
-    <h1>AutoArchive</h1>
+    <a href="index.html"><img src="IMG_1421.png" alt="AutoArchive Logo" /></a>
+    <nav>
+      <a href="#">O nas</a>
+      <a href="#">Kontakt</a>
+      <a href="#">FAQ</a>
+    </nav>
   </header>
 
   <div class="container">
-    <div class="car-images">
-      <img src="bmw1.jpg" alt="BMW 530xi zdjęcie 1">
-      <img src="bmw2.jpg" alt="BMW 530xi zdjęcie 2">
-      <img src="bmw3.jpg" alt="BMW 530xi zdjęcie 3">
-      <img src="bmw4.jpg" alt="BMW 530xi zdjęcie 4">
-      <img src="bmw5.jpg" alt="BMW 530xi zdjęcie 5">
+    <h1>BMW 530xi – Historia pojazdu</h1>
+
+    <div class="gallery">
+      <img src="car1.jpg" alt="Zdjęcie BMW 1" />
+      <img src="car1b.jpg" alt="Zdjęcie BMW 2" />
+      <img src="car1c.jpg" alt="Zdjęcie BMW 3" />
     </div>
 
-    <div class="info">
-      <p><strong>VIN:</strong> WBA5A7C52ED619297</p>
-      <p><strong>Model:</strong> BMW 530xi 2014</p>
-      <p><strong>Zakup:</strong> California, Los Angeles</p>
-      <p><strong>Cena zakupu:</strong> $8,700</p>
-      <p><strong>Uszkodzenia:</strong> Front-end, lewy bok</p>
-      <p><strong>Tytuł:</strong> Salvage</p>
+    <div class="details">
+      <p><span>VIN:</span> WBAFU7C5XDDU76492</p>
+      <p><span>Cena końcowa:</span> $6,700</p>
+      <p><span>Miejsce zakupu:</span> New Jersey, Trenton</p>
+      <p><span>Uszkodzenia:</span> Front End, Minor Dents/Scratches</p>
+      <p><span>Tytuł pojazdu:</span> Salvage</p>
     </div>
 
-    <button class="remove-btn" onclick="openPayment()">Usuń historię</button>
+    <button class="remove-btn" onclick="showPayment()">Usuń historię</button>
   </div>
 
   <div class="payment-modal" id="paymentModal">
-    <div class="payment-content">
-      <h2>Usuń historię pojazdu</h2>
-      <p>Aby usunąć historię pojazdu, dokonaj opłaty 39 zł</p>
-      <button onclick="alert('Płatność testowa – funkcja w przygotowaniu')">Przejdź do płatności</button><br/>
-      <button onclick="closePayment()">Anuluj</button>
+    <div class="payment-box">
+      <h2>Opłać usunięcie</h2>
+      <p>149 zł za usunięcie historii</p>
+      <button onclick="hidePayment()">Zamknij</button>
     </div>
   </div>
 
+  <div class="footer">
+    © 2025 AutoArchive. Wszelkie prawa zastrzeżone.
+  </div>
+
   <script>
-    function openPayment() {
-      document.getElementById('paymentModal').style.display = 'flex';
+    function showPayment() {
+      document.getElementById("paymentModal").style.display = "flex";
     }
-    function closePayment() {
-      document.getElementById('paymentModal').style.display = 'none';
+    function hidePayment() {
+      document.getElementById("paymentModal").style.display = "none";
     }
   </script>
+
 </body>
 </html>
