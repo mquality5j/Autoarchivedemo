@@ -12,21 +12,22 @@
     }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
-      color: #333;
+      background: #121212;
+      color: #e0e0e0;
     }
     header {
-      background: #1c2a44;
+      background: #1a1a1a;
       padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #333;
     }
     header img {
-      height: 40px;
+      height: 50px;
     }
     nav a {
-      color: #fff;
+      color: #f0f0f0;
       margin-left: 20px;
       text-decoration: none;
       font-weight: 500;
@@ -44,14 +45,16 @@
     .search-bar input {
       width: 320px;
       padding: 12px 16px;
-      border: 1px solid #ccc;
+      border: 1px solid #555;
+      background: #1e1e1e;
+      color: #fff;
       border-radius: 8px 0 0 8px;
       font-size: 16px;
     }
     .search-bar button {
       padding: 12px 20px;
       border: none;
-      background-color: #1c2a44;
+      background-color: #e53935;
       color: white;
       font-weight: bold;
       border-radius: 0 8px 8px 0;
@@ -63,83 +66,7 @@
       gap: 30px;
     }
     .card {
-      background: #fff;
+      background: #1e1e1e;
       border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card-content {
-      padding: 20px;
-    }
-    .card-content h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    .card-content p {
-      color: #666;
-      font-size: 14px;
-    }
-    footer {
-      text-align: center;
-      font-size: 14px;
-      padding: 30px 0;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <a href="index.html"><img src="IMG_1421.png" alt="AutoArchive Logo" /></a>
-    <nav>
-      <a href="#">O nas</a>
-      <a href="#">Kontakt</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" id="vinSearch" placeholder="Wyszukaj VIN..." />
-      <button onclick="searchVIN()">Szukaj</button>
-    </div>
-
-    <div class="grid" id="carGrid">
-      <a class="card" href="car1.html">
-        <img src="car1.jpg" alt="BMW 530xi" />
-        <div class="card-content">
-          <h3>BMW 530xi</h3>
-          <p>VIN: WBAFU7C5XDDU76492</p>
-        </div>
-      </a>
-      <!-- Możesz dodać kolejne samochody tutaj -->
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 AutoArchive – Wszystkie prawa zastrzeżone.
-  </footer>
-
-  <script>
-    function searchVIN() {
-      const input = document.getElementById('vinSearch').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        const vin = card.querySelector('p').innerText.toLowerCase();
-        card.style.display = vin.includes(input) ? 'block' : 'none';
-      });
-    }
-  </script>
-
-</body>
-</html>
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+     
