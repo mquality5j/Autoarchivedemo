@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AutoArchive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff;
-      color: #222;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark {
-      background-color: #121212;
-      color: #eee;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
     header {
       background-color: #1f3b6d;
@@ -23,177 +17,130 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
     }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    header h1 a {
-      color: white;
-      text-decoration: none;
+    header img {
+      height: 40px;
     }
     nav a {
       color: white;
-      margin-left: 15px;
-      text-decoration: none;
-    }
-    .lang-select {
       margin-left: 20px;
-    }
-    .lang-select select {
-      padding: 5px;
+      text-decoration: none;
+      font-weight: bold;
     }
     .container {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 0 15px;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .car-entry {
+    h1 {
+      margin-top: 0;
+    }
+    #vinInput {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .car {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: #f0f0f0;
-      padding: 15px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      transition: background 0.3s;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 4px;
+      background: #fafafa;
     }
-    body.dark .car-entry {
-      background: #1e1e1e;
-    }
-    .car-entry img {
-      width: 100px;
+    .car img {
+      width: 120px;
       height: auto;
       margin-right: 20px;
       border-radius: 4px;
+      object-fit: cover;
     }
-    .toggle-dark {
-      background: none;
-      border: 1px solid white;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
+    .car-details {
+      flex-grow: 1;
     }
-    .search-box {
-      margin-top: 20px;
-    }
-    .search-box input {
-      padding: 8px;
-      width: 250px;
-    }
-    .search-box button {
-      padding: 8px 10px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-    @media (max-width: 600px) {
-      .car-entry {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .car-entry img {
-        margin-bottom: 10px;
-      }
+    .car-details h3 {
+      margin: 0 0 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1><a href="index.html">AutoArchive</a></h1>
+    <img src="IMG_1421.png" alt="AutoArchive Logo" />
     <nav>
-      <a href="#">🏠 <span class="tr" data-key="home">Strona główna</span></a>
-      <a href="#">ℹ️ <span class="tr" data-key="about">O nas</span></a>
-      <a href="#">📬 <span class="tr" data-key="contact">Kontakt</span></a>
-      <a href="#">🔍 <span class="tr" data-key="search">Szukaj VIN</span></a>
-      <select class="lang-select" onchange="setLanguage(this.value)">
-        <option value="pl">PL</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-        <option value="ru">RU</option>
-      </select>
-      <button class="toggle-dark" onclick="toggleDark()">🌙</button>
+      <a href="#">O nas</a>
+      <a href="#">Kontakt</a>
+      <a href="#">FAQ</a>
     </nav>
   </header>
 
   <div class="container">
-    <div class="search-box">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN...">
-      <button onclick="searchVIN()">🔍 <span class="tr" data-key="search">Szukaj VIN</span></button>
-    </div>
-
-    <div class="car-entry">
-      <img src="car1_thumb.jpg" alt="BMW 530xi">
-      <div>
-        <h2>BMW 530xi</h2>
-        <p><strong>VIN:</strong> WBAFU7C59BC861936</p>
-        <a href="car_1.html" class="tr" data-key="view">Zobacz szczegóły</a>
+    <h1>Wyszukaj historię pojazdu po numerze VIN</h1>
+    <input type="text" id="vinInput" placeholder="Wpisz VIN..." oninput="filterCars()" />
+    
+    <div id="carList">
+      <div class="car">
+        <img src="car1.jpg" alt="Zdjęcie BMW 530xi">
+        <div class="car-details">
+          <h3>BMW 530xi</h3>
+          <p><strong>VIN:</strong> WBAFU7C5XDDU76492</p>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const translations = {
-      "pl": {
-        home: "Strona główna",
-        about: "O nas",
-        contact: "Kontakt",
-        search: "Szukaj VIN",
-        view: "Zobacz szczegóły"
-      },
-      "en": {
-        home: "Home",
-        about: "About",
-        contact: "Contact",
-        search: "Search VIN",
-        view: "View details"
-      },
-      "de": {
-        home: "Startseite",
-        about: "Über uns",
-        contact: "Kontakt",
-        search: "VIN suchen",
-        view: "Details ansehen"
-      },
-      "ru": {
-        home: "Главная",
-        about: "О нас",
-        contact: "Контакт",
-        search: "Поиск VIN",
-        view: "Подробнее"
+    const cars = [
+      {
+        vin: "WBAFU7C5XDDU76492",
+        model: "BMW 530xi",
+        img: "car1.jpg"
       }
-    };
+    ];
 
-    function setLanguage(lang) {
-      document.querySelectorAll(".tr").forEach(el => {
-        const key = el.dataset.key;
-        el.textContent = translations[lang][key];
-      });
-      localStorage.setItem("lang", lang);
-    }
+    function filterCars() {
+      const input = document.getElementById("vinInput").value.toUpperCase();
+      const list = document.getElementById("carList");
+      list.innerHTML = "";
 
-    function toggleDark() {
-      document.body.classList.toggle("dark");
-      const isDark = document.body.classList.contains("dark");
-      localStorage.setItem("darkMode", isDark ? "true" : "false");
-    }
+      cars
+        .filter(car => car.vin.includes(input))
+        .forEach(car => {
+          const el = document.createElement("div");
+          el.className = "car";
+          el.innerHTML = `
+            <img src="${car.img}" alt="Zdjęcie ${car.model}">
+            <div class="car-details">
+              <h3>${car.model}</h3>
+              <p><strong>VIN:</strong> ${car.vin}</p>
+            </div>
+          `;
+          list.appendChild(el);
+        });
 
-    function searchVIN() {
-      const vin = document.getElementById("vinInput").value.trim().toUpperCase();
-      if (vin === "WBAFU7C59BC861936") {
-        window.location.href = "car_1.html";
-      } else {
-        alert("Nie znaleziono pojazdu o tym VIN.");
+      if (input === "") {
+        cars.forEach(car => {
+          const el = document.createElement("div");
+          el.className = "car";
+          el.innerHTML = `
+            <img src="${car.img}" alt="Zdjęcie ${car.model}">
+            <div class="car-details">
+              <h3>${car.model}</h3>
+              <p><strong>VIN:</strong> ${car.vin}</p>
+            </div>
+          `;
+          list.appendChild(el);
+        });
       }
     }
 
-    // Load language and dark mode from localStorage
-    const savedLang = localStorage.getItem("lang") || "pl";
-    setLanguage(savedLang);
-    if (localStorage.getItem("darkMode") === "true") {
-      document.body.classList.add("dark");
-    }
+    filterCars();
   </script>
 </body>
 </html>
