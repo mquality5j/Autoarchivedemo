@@ -1,111 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>AutoArchive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f7f7f7;
       margin: 0;
-      background: #f4f4f4;
+      padding: 0;
     }
-
     header {
-      background: #1f3b6d;
+      background-color: #1f3b6d;
       color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: center;
+      padding: 20px;
     }
-
-    header img {
-      height: 50px;
+    .logo {
+      width: 120px;
     }
-
-    nav a {
-      color: white;
-      margin-left: 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
     .container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: auto;
       padding: 20px;
     }
-
-    .search {
+    .search-bar {
       display: flex;
       margin-bottom: 20px;
     }
-
-    .search input {
+    #vinInput {
       flex: 1;
       padding: 10px;
       font-size: 16px;
-      border: 1px solid #ccc;
     }
-
-    .search button {
+    button {
       padding: 10px 20px;
       font-size: 16px;
-      border: none;
       background: #1f3b6d;
       color: white;
-      cursor: pointer;
+      border: none;
     }
-
     .car {
       background: white;
-      padding: 20px;
-      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 15px;
       border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
-
     .car h3 {
-      margin-top: 0;
+      margin: 5px 0;
     }
-
-    .car img {
-      max-width: 100%;
-      margin: 10px 0;
-      border-radius: 4px;
-    }
-
-    .car-details {
-      margin-top: 10px;
-    }
-
-    .car-gallery {
+    .car-images {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
-
-    .car-gallery img {
-      width: calc(33.33% - 10px);
+    .car-images img {
+      height: 100px;
+      border-radius: 4px;
       object-fit: cover;
+    }
+    .remove-btn {
+      background: #c62828;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      float: right;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="IMG_1421.png" alt="AutoArchive Logo" />
-    <nav>
-      <a href="#">Strona główna</a>
-      <a href="#">O nas</a>
-      <a href="#">Kontakt</a>
-    </nav>
+    <img src="IMG_1421.png" class="logo" alt="AutoArchive Logo">
+    <h1>AutoArchive</h1>
+    <p>Wyszukaj historię pojazdu po numerze VIN</p>
   </header>
-
   <div class="container">
-    <div class="search">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN..." />
-      <button onclick="searchVIN()">Szukaj</button>
+    <div class="search-bar">
+      <input type="text" id="vinInput" placeholder="Enter VIN...">
+      <button onclick="searchVIN()">Search</button>
     </div>
     <div id="carList"></div>
   </div>
@@ -115,47 +91,51 @@
       {
         vin: "1HGCM82633A004352",
         model: "Honda Accord 2003",
-        price: "$2,500",
-        location: "Texas, Houston",
-        damage: "Front damage",
+        price: "$3,500",
+        location: "Miami, Florida",
+        damage: "Front impact",
         title: "Salvage",
-        images: ["car1.jpg", "car2.jpg", "car3.jpg"]
+        images: ["honda1.jpg", "honda2.jpg"]
       },
       {
-        vin: "1C4RJFBG0FC625797",
+        vin: "1C4RJFBF6FC625797",
         model: "Jeep Grand Cherokee 2015",
-        price: "$8,000",
-        location: "Florida, Miami",
-        damage: "Rear damage",
-        title: "Clean",
-        images: ["car4.jpg", "car5.jpg"]
+        price: "$10,000",
+        location: "Denver, Colorado",
+        damage: "Rear end",
+        title: "Salvage",
+        images: ["jeep1.jpg", "jeep2.jpg", "jeep3.jpg"]
+      },
+      {
+        vin: "WDBUF56X78B278934",
+        model: "Mercedes E350 2008",
+        price: "$7,200",
+        location: "Boston, Massachusetts",
+        damage: "Side",
+        title: "Salvage",
+        images: ["merc1.jpg", "merc2.jpg"]
       }
     ];
 
     function renderCars(filter = "") {
       const carList = document.getElementById("carList");
       carList.innerHTML = "";
-
-      cars
-        .filter(car => car.vin.includes(filter.toUpperCase()))
-        .forEach(car => {
-          const el = document.createElement("div");
-          el.className = "car";
-          el.innerHTML = `
-            <h3>${car.model}</h3>
-            <div class="car-details">
-              <strong>VIN:</strong> ${car.vin}<br />
-              <strong>Cena:</strong> ${car.price}<br />
-              <strong>Lokalizacja:</strong> ${car.location}<br />
-              <strong>Uszkodzenia:</strong> ${car.damage}<br />
-              <strong>Tytuł:</strong> ${car.title}
-            </div>
-            <div class="car-gallery">
-              ${car.images.map(img => `<img src="${img}" alt="Zdjęcie auta" />`).join("")}
-            </div>
-          `;
-          carList.appendChild(el);
-        });
+      cars.filter(car => car.vin.toLowerCase().includes(filter.toLowerCase())).forEach(car => {
+        const carEl = document.createElement("div");
+        carEl.className = "car";
+        carEl.innerHTML = `
+          <button class="remove-btn" onclick="this.parentElement.remove()">Usuń</button>
+          <h3>${car.vin} - ${car.model}</h3>
+          <p><strong>Price:</strong> ${car.price}</p>
+          <p><strong>Location:</strong> ${car.location}</p>
+          <p><strong>Damage:</strong> ${car.damage}</p>
+          <p><strong>Title:</strong> ${car.title}</p>
+          <div class="car-images">
+            ${car.images.map(img => `<img src="${img}" alt="Zdjęcie auta">`).join("")}
+          </div>
+        `;
+        carList.appendChild(carEl);
+      });
     }
 
     function searchVIN() {
@@ -163,8 +143,7 @@
       renderCars(value);
     }
 
-    // Pokaż wszystkie na starcie
-    renderCars();
+    window.onload = () => renderCars();
   </script>
 </body>
 </html>
