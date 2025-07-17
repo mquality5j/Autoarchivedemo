@@ -26,7 +26,12 @@
     </div>
 
     <script>
-        const cars = [
+        const cars = [carDiv.innerHTML = `
+  <p class="vin">VIN: ${car.vin}</p>
+  <p>${car.model}</p>
+  <img src="${car.img}" alt="Zdjęcie auta">
+  <button class="remove-btn" onclick="removeCar(${index})">Usuń wpis</button>
+`;
             { vin: "1HGCM82633A004352", model: "Honda Accord 2003", img: "https://via.placeholder.com/800x400?text=Honda+Accord" },
             { vin: "1C4RJFBG0FC625797", model: "Jeep Grand Cherokee 2015", img: "https://via.placeholder.com/800x400?text=Jeep+Grand+Cherokee" },
             { vin: "WDBUF56X78B278934", model: "Mercedes E350 2008", img: "https://via.placeholder.com/800x400?text=Mercedes+E350" },
