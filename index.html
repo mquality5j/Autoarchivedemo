@@ -38,13 +38,26 @@
     h1 {
       margin-top: 0;
     }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
     #vinInput {
-      width: 100%;
+      flex: 1;
       padding: 10px;
       font-size: 16px;
-      margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
+    }
+    #searchBtn {
+      padding: 10px 20px;
+      background-color: #1f3b6d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
     }
     .car {
       display: flex;
@@ -54,6 +67,7 @@
       padding: 10px;
       border-radius: 4px;
       background: #fafafa;
+      cursor: pointer;
     }
     .car img {
       width: 120px;
@@ -88,16 +102,13 @@
 
   <div class="container">
     <h1>Wyszukaj historię pojazdu po numerze VIN</h1>
-    <input type="text" id="vinInput" placeholder="Wpisz VIN..." oninput="filterCars()" />
+    <div class="search-box">
+      <input type="text" id="vinInput" placeholder="Wpisz VIN..." />
+      <button id="searchBtn" onclick="filterCars()">Szukaj</button>
+    </div>
     
     <div id="carList">
-      <div class="car">
-        <img src="car1.jpg" alt="Zdjęcie BMW 530xi">
-        <div class="car-details">
-          <h3>BMW 530xi</h3>
-          <p><strong>VIN:</strong> WBAFU7C5XDDU76492</p>
-        </div>
-      </div>
+      <!-- Auta zostaną wstawione przez JS -->
     </div>
   </div>
 
@@ -110,7 +121,8 @@
       {
         vin: "WBAFU7C5XDDU76492",
         model: "BMW 530xi",
-        img: "car1.jpg"
+        img: "car1.jpg",
+        link: "car1.html"
       }
     ];
 
@@ -119,37 +131,26 @@
       const list = document.getElementById("carList");
       list.innerHTML = "";
 
-      cars
-        .filter(car => car.vin.includes(input))
-        .forEach(car => {
-          const el = document.createElement("div");
-          el.className = "car";
-          el.innerHTML = `
-            <img src="${car.img}" alt="Zdjęcie ${car.model}">
-            <div class="car-details">
-              <h3>${car.model}</h3>
-              <p><strong>VIN:</strong> ${car.vin}</p>
-            </div>
-          `;
-          list.appendChild(el);
-        });
+      const filtered = input
+        ? cars.filter(car => car.vin.includes(input))
+        : cars;
 
-      if (input === "") {
-        cars.forEach(car => {
-          const el = document.createElement("div");
-          el.className = "car";
-          el.innerHTML = `
-            <img src="${car.img}" alt="Zdjęcie ${car.model}">
-            <div class="car-details">
-              <h3>${car.model}</h3>
-              <p><strong>VIN:</strong> ${car.vin}</p>
-            </div>
-          `;
-          list.appendChild(el);
-        });
-      }
+      filtered.forEach(car => {
+        const el = document.createElement("div");
+        el.className = "car";
+        el.onclick = () => window.location.href = car.link;
+        el.innerHTML = `
+          <img src="${car.img}" alt="Zdjęcie ${car.model}">
+          <div class="car-details">
+            <h3>${car.model}</h3>
+            <p><strong>VIN:</strong> ${car.vin}</p>
+          </div>
+        `;
+        list.appendChild(el);
+      });
     }
 
+    // Pokaż wszystkie na start
     filterCars();
   </script>
 </body>
