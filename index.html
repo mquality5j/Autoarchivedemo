@@ -1,137 +1,160 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>AutoArchive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
     }
     header {
       background-color: #1f3b6d;
       color: white;
+      padding: 20px 0;
       text-align: center;
-      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
-    .logo {
-      width: 120px;
+    header img {
+      height: 60px;
+      vertical-align: middle;
+    }
+    header h1 {
+      display: inline-block;
+      margin: 0;
+      font-size: 28px;
+      vertical-align: middle;
     }
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
     }
     .search-bar {
       display: flex;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 30px;
     }
-    #vinInput {
+    .search-bar input {
       flex: 1;
       padding: 10px;
       font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
     }
-    button {
+    .search-bar button {
+      background-color: #1f3b6d;
+      color: white;
+      border: none;
       padding: 10px 20px;
       font-size: 16px;
-      background: #1f3b6d;
-      color: white;
-      border: none;
-    }
-    .car {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-    }
-    .car h3 {
-      margin: 5px 0;
-    }
-    .car-images {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    .car-images img {
-      height: 100px;
       border-radius: 4px;
-      object-fit: cover;
-    }
-    .remove-btn {
-      background: #c62828;
-      color: white;
-      border: none;
-      padding: 5px 10px;
       cursor: pointer;
-      float: right;
+    }
+    .car-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .car-card h2 {
+      margin-top: 0;
+    }
+    .car-details {
+      margin-top: 15px;
+      line-height: 1.6;
+    }
+    .placeholder {
+      width: 100%;
+      height: 200px;
+      background-color: #ddd;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #666;
+      font-size: 18px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      font-size: 14px;
+      color: #777;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="IMG_1421.png" class="logo" alt="AutoArchive Logo">
+    <img src="IMG_1421.png" alt="Logo AutoArchive">
     <h1>AutoArchive</h1>
-    <p>Wyszukaj historię pojazdu po numerze VIN</p>
   </header>
+
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Enter VIN...">
-      <button onclick="searchVIN()">Search</button>
+      <input type="text" id="vinInput" placeholder="Wprowadź VIN...">
+      <button onclick="searchVIN()">Szukaj</button>
     </div>
-    <div id="carList"></div>
+
+    <div id="carList">
+      <!-- Karty pojazdów wypełniane dynamicznie -->
+    </div>
   </div>
+
+  <footer>
+    © 2025 AutoArchive. Wszelkie prawa zastrzeżone.
+  </footer>
 
   <script>
     const cars = [
       {
-        vin: "123ABC456DEF78900",
-        model: "Toyota Camry 2012",
-        price: "$4,500",
-        location: "Chicago, IL",
-        damage: "Front end",
-        title: "Salvage",
-        images: ["car1.jpg", "car2.jpg"]
+        vin: "5YJ3E1EA7HF000337",
+        model: "Tesla Model 3",
+        price: "$22,000",
+        location: "California, San Diego",
+        damage: "Front damage",
+        title: "Clean"
       },
       {
-        vin: "987XYZ654LMN32100",
-        model: "Ford F-150 2016",
-        price: "$9,800",
-        location: "Dallas, TX",
-        damage: "Rear damage",
-        title: "Clean",
-        images: ["car3.jpg", "car4.jpg", "car5.jpg"]
+        vin: "JHMFA16586S000435",
+        model: "Honda Civic Hybrid",
+        price: "$5,600",
+        location: "Texas, Houston",
+        damage: "Rear impact",
+        title: "Salvage"
       }
     ];
 
     function renderCars(filter = "") {
-      const carList = document.getElementById("carList");
-      carList.innerHTML = "";
-      cars.filter(car => car.vin.toLowerCase().includes(filter.toLowerCase())).forEach(car => {
-        const carEl = document.createElement("div");
-        carEl.className = "car";
-        carEl.innerHTML = `
-          <button class="remove-btn" onclick="this.parentElement.remove()">Usuń</button>
-          <h3>${car.vin} - ${car.model}</h3>
-          <p><strong>Price:</strong> ${car.price}</p>
-          <p><strong>Location:</strong> ${car.location}</p>
-          <p><strong>Damage:</strong> ${car.damage}</p>
-          <p><strong>Title:</strong> ${car.title}</p>
-          <div class="car-images">
-            ${car.images.map(img => `<img src="${img}" alt="Zdjęcie auta">`).join("")}
-          </div>
-        `;
-        carList.appendChild(carEl);
-      });
+      const list = document.getElementById("carList");
+      list.innerHTML = "";
+      cars.filter(c => c.vin.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(car => {
+          const div = document.createElement("div");
+          div.className = "car-card";
+          div.innerHTML = `
+            <h2>${car.model}</h2>
+            <div class="placeholder">[Zdjęcie samochodu]</div>
+            <div class="car-details">
+              <strong>VIN:</strong> ${car.vin}<br>
+              <strong>Cena:</strong> ${car.price}<br>
+              <strong>Miejsce zakupu:</strong> ${car.location}<br>
+              <strong>Uszkodzenia:</strong> ${car.damage}<br>
+              <strong>Tytuł:</strong> ${car.title}
+            </div>
+          `;
+          list.appendChild(div);
+        });
     }
 
     function searchVIN() {
-      const value = document.getElementById("vinInput").value;
-      renderCars(value);
+      const vin = document.getElementById("vinInput").value;
+      renderCars(vin);
     }
 
     window.onload = () => renderCars();
