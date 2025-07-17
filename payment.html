@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>AutoArchive – Płatność za usunięcie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #1f3b6d;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .methods {
+      margin: 20px 0;
+    }
+    .methods label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .confirm-btn {
+      background-color: #1f3b6d;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .confirm-btn:hover {
+      background-color: #17315c;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AutoArchive</h1>
+  </header>
+
+  <div class="container">
+    <h2>Opłata za usunięcie historii pojazdu</h2>
+    <p>Usunięcie historii danego pojazdu kosztuje: <strong>149 zł</strong></p>
+
+    <div class="methods">
+      <label><input type="radio" name="method" checked> BLIK</label>
+      <label><input type="radio" name="method"> Przelew bankowy</label>
+      <label><input type="radio" name="method"> PayPal</label>
+    </div>
+
+    <a href="#" class="confirm-btn" onclick="alert('Dziękujemy za płatność! Pojazd zostanie usunięty w ciągu 24h.');">Potwierdź i usuń</a>
+  </div>
+
+  <div class="footer">
+    © 2025 AutoArchive – Twoja prywatność jest dla nas ważna.
+  </div>
+</body>
+</html>
