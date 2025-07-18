@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoArchive – BMW 335i</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2196f3;
+    }
+
+    .details {
+      background: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .info {
+      margin: 8px 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .delete-btn {
+      background-color: red;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .delete-btn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BMW 335i 2013</h1>
+
+    <div class="details">
+      <div class="info"><strong>VIN:</strong> WBAKF9C52DJ430909</div>
+      <div class="info"><strong>Cena:</strong> $4,750</div>
+      <div class="info"><strong>Miejsce zakupu:</strong> Teksas, Dallas</div>
+      <div class="info"><strong>Uszkodzenia:</strong> Tył + zawieszenie</div>
+      <div class="info"><strong>Tytuł:</strong> Clean Title</div>
+    </div>
+
+    <div class="gallery">
+      <img src="car2-1.jpg" alt="Zdjęcie 1 pojazdu">
+      <img src="car2-2.jpg" alt="Zdjęcie 2 pojazdu">
+      <img src="car2-3.jpg" alt="Zdjęcie 3 pojazdu">
+    </div>
+
+    <a href="payment.html"><button class="delete-btn">Usuń historię</button></a>
+  </div>
+</body>
+</html>
