@@ -166,4 +166,58 @@
       },
       {
         vin: "1C4RJFBG0FC625797",
-        model: "Jeep Grand Cherokee 
+        model: "Jeep Grand Cherokee 2015",
+        img: "car2.jpg",
+        link: "car2.html"
+      },
+      {
+        vin: "WDBUF56X78B278934",
+        model: "Mercedes E350 2008",
+        img: "car3.jpg",
+        link: "car3.html"
+      },
+    ];
+
+    const carList = document.getElementById("carList");
+
+    function renderCars(filter = "") {
+      carList.innerHTML = "";
+      cars
+        .filter(car => car.vin.includes(filter.toUpperCase()))
+        .forEach(car => {
+          const el = document.createElement("div");
+          el.className = "car";
+          el.innerHTML = `
+            <div class="vin">VIN: ${car.vin}</div>
+            <div>${car.model}</div>
+            <img src="${car.img}" alt="Zdjęcie auta" />
+          `;
+          el.addEventListener("click", () => {
+            window.location.href = car.link;
+          });
+          carList.appendChild(el);
+        });
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        document.body.classList.add("light-mode");
+      }
+      renderCars();
+    });
+
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const value = document.getElementById("vinInput").value;
+      renderCars(value);
+    });
+  </script>
+
+</body>
+</html>
