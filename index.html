@@ -28,7 +28,7 @@
 
     header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       background-color: var(--bg-color);
       padding: 15px 30px;
@@ -41,16 +41,9 @@
 
     .nav-right {
       display: flex;
-      align-items: flex-start;
-      gap: 30px;
-    }
-
-    nav a {
-      color: var(--accent-color);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      margin-right: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
     }
 
     .settings {
@@ -58,6 +51,18 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
     }
 
     .theme-btn, select {
@@ -177,7 +182,10 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car => car.vin.includes(filter.toUpperCase()))
+        .filter(car =>
+          car.vin.includes(filter.toUpperCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase())
+        )
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
