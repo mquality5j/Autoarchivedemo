@@ -37,6 +37,7 @@
 
     .logo {
       height: 120px;
+      cursor: pointer;
     }
 
     .nav-right {
@@ -77,14 +78,16 @@
 
     .search-bar {
       display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 20px;
     }
 
-    #vinInput {
+    .search-bar input {
       flex: 1;
       padding: 10px;
       border: none;
-      border-radius: 4px 0 0 4px;
+      border-radius: 4px;
       font-size: 1rem;
     }
 
@@ -93,7 +96,7 @@
       background-color: var(--accent-color);
       color: white;
       border: none;
-      border-radius: 0 4px 4px 0;
+      border-radius: 4px;
       font-weight: bold;
       cursor: pointer;
     }
@@ -104,6 +107,7 @@
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
     }
 
     .car img {
@@ -121,7 +125,7 @@
 <body>
 
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" onclick="location.href='index.html'" />
     <div class="nav-right">
       <nav>
         <a href="#">O nas</a>
@@ -129,7 +133,7 @@
       </nav>
       <div class="settings">
         <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-        <select id="langSelect">
+        <select id="langSelect" onchange="saveLang(this.value)">
           <option value="pl">PL</option>
           <option value="en">EN</option>
           <option value="de">DE</option>
@@ -141,56 +145,33 @@
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację lub tytuł..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, tytuł lub lokalizację..." />
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
   </div>
 
+  <script src="cars.js"></script>
   <script>
-    const cars = [
-      {
-        vin: "1HGCM82633A004352",
-        model: "Honda Accord 2003",
-        location: "CA, Los Angeles",
-        title: "Clean",
-        img: "car1.jpg"
-      },
-      {
-        vin: "1C4RJFBG0FC625797",
-        model: "Jeep Grand Cherokee 2015",
-        location: "TX, Dallas",
-        title: "Salvage",
-        img: "car2.jpg"
-      },
-      {
-        vin: "WDBUF56X78B278934",
-        model: "Mercedes E350 2008",
-        location: "FL, Miami",
-        title: "Rebuilt",
-        img: "car3.jpg"
-      }
-    ];
-
     const carList = document.getElementById("carList");
 
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car => {
-          const f = filter.toLowerCase();
-          return car.vin.toLowerCase().includes(f) ||
-                 car.model.toLowerCase().includes(f) ||
-                 car.location.toLowerCase().includes(f) ||
-                 car.title.toLowerCase().includes(f);
-        })
+        .filter(car =>
+          car.vin.toLowerCase().includes(filter.toLowerCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase()) ||
+          car.title.toLowerCase().includes(filter.toLowerCase()) ||
+          car.location.toLowerCase().includes(filter.toLowerCase())
+        )
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
+          el.onclick = () => window.location.href = car.link;
           el.innerHTML = `
             <div class="vin">VIN: ${car.vin}</div>
-            <div>${car.model}</div>
-            <div>${car.location} – ${car.title}</div>
+            <div>${car.model} (${car.title})</div>
+            <div>${car.location}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
           carList.appendChild(el);
@@ -199,6 +180,23 @@
 
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
+      localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+    }
+
+    function saveLang(value) {
+      localStorage.setItem("lang", value);
+    }
+
+    function restoreSettings() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        document.body.classList.add("light-mode");
+      }
+
+      const savedLang = localStorage.getItem("lang");
+      if (savedLang) {
+        document.getElementById("langSelect").value = savedLang;
+      }
     }
 
     document.getElementById("searchBtn").addEventListener("click", () => {
@@ -206,8 +204,8 @@
       renderCars(value);
     });
 
-    renderCars(); // pokaż wszystkie na start
+    restoreSettings();
+    renderCars();
   </script>
-
 </body>
 </html>
