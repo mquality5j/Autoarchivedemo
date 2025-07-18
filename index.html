@@ -8,18 +8,18 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      background-color: #111827;
+      color: #fff;
       transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background: #111827;
-      color: white;
+      background: #1f2937;
       padding: 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      align-items: flex-start;
     }
 
     .logo {
@@ -28,33 +28,50 @@
     }
 
     .logo img {
-      height: 80px;
+      height: 110px;
       margin-right: 15px;
     }
 
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    .logo h1 {
+      font-size: 28px;
+      margin: 0;
+      color: white;
     }
 
-    .menu button,
-    .menu select {
-      padding: 6px 10px;
-      margin-top: 5px;
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 5px;
+    }
+
+    .top-buttons button {
+      padding: 6px 12px;
+      background: #2563eb;
       border: none;
+      color: white;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    .menu button:hover {
-      opacity: 0.9;
+    .lang-select {
+      margin-top: 5px;
+    }
+
+    .lang-select select {
+      padding: 5px;
+      border-radius: 5px;
     }
 
     .container {
-      padding: 20px;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: auto;
+      padding: 20px;
     }
 
     .search-bar {
@@ -63,81 +80,67 @@
       margin-bottom: 20px;
     }
 
-    input[type="text"] {
+    .search-bar input {
       flex: 1;
       padding: 10px;
       font-size: 16px;
     }
 
-    button.search-btn {
-      background-color: #2563eb;
+    .search-bar button {
+      padding: 10px 15px;
+      background: #2563eb;
       color: white;
+      border: none;
+      border-radius: 5px;
       font-size: 16px;
+      cursor: pointer;
     }
 
     .car {
-      background: white;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
+      background: #1f2937;
+      border: 1px solid #374151;
       padding: 15px;
-      border-radius: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .car:hover {
-      transform: scale(1.01);
     }
 
     .car img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
       margin-top: 10px;
-    }
-
-    /* Dark mode */
-    body.dark {
-      background: #1f2937;
-      color: white;
-    }
-
-    body.dark .car {
-      background: #374151;
-      border-color: #4b5563;
-    }
-
-    body.dark input,
-    body.dark button,
-    body.dark select {
-      background: #111827;
-      color: white;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo">
+      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" />
       <h1>AutoArchive</h1>
     </div>
-    <div class="menu">
-      <button onclick="toggleTheme()">🌓</button>
-      <select onchange="changeLanguage(this.value)">
-        <option value="pl">Polski</option>
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="ru">Русский</option>
-      </select>
-      <a href="#"><button>O nas</button></a>
-      <a href="#"><button>Kontakt</button></a>
+    <div class="controls">
+      <div class="top-buttons">
+        <button onclick="toggleTheme()">🌓 Tryb</button>
+        <a href="#"><button>O nas</button></a>
+        <a href="#"><button>Kontakt</button></a>
+      </div>
+      <div class="lang-select">
+        <select onchange="changeLang(this.value)">
+          <option value="pl">Polski</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
     </div>
   </header>
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN...">
-      <button class="search-btn" onclick="searchVIN()">Szukaj</button>
+      <input type="text" id="vinInput" placeholder="Wyszukaj VIN...">
+      <button onclick="searchVIN()">Szukaj</button>
     </div>
     <div id="carList"></div>
   </div>
@@ -158,40 +161,37 @@
       }
     ];
 
-    const carList = document.getElementById("carList");
-
     function renderCars(filter = "") {
-      carList.innerHTML = "";
+      const list = document.getElementById("carList");
+      list.innerHTML = "";
       cars
-        .filter(car => car.vin.toUpperCase().includes(filter.toUpperCase()))
+        .filter(car => car.vin.toLowerCase().includes(filter.toLowerCase()))
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
           el.innerHTML = `
-            <strong>VIN:</strong> ${car.vin}<br>
-            <strong>Model:</strong> ${car.model}<br>
-            <img src="${car.img}" alt="Zdjęcie auta">
+            <strong>${car.model}</strong><br>
+            VIN: ${car.vin}
+            <img src="${car.img}" alt="${car.model}">
           `;
-          el.onclick = () => location.href = car.link;
-          carList.appendChild(el);
+          el.onclick = () => window.location.href = car.link;
+          list.appendChild(el);
         });
     }
 
     function searchVIN() {
-      const value = document.getElementById("vinInput").value;
-      renderCars(value);
+      const vin = document.getElementById("vinInput").value;
+      renderCars(vin);
     }
 
     function toggleTheme() {
       document.body.classList.toggle("dark");
     }
 
-    function changeLanguage(lang) {
+    function changeLang(lang) {
       alert("Zmiana języka na: " + lang);
-      // W pełnej wersji: załaduj tłumaczenia
     }
 
-    // Start
     renderCars();
   </script>
 </body>
