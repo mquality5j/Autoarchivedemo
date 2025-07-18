@@ -6,9 +6,9 @@
   <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #121212;
+      --bg-color: #2e2e2e;
       --text-color: #e0e0e0;
-      --card-bg: #1f1f1f;
+      --card-bg: #3a3a3a;
       --accent-color: #2196f3;
     }
 
@@ -41,12 +41,21 @@
 
     .nav-right {
       display: flex;
-      align-items: center;
-      gap: 30px;
+      align-items: flex-end;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    nav a {
-      color: var(--accent-color);
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-buttons a {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
@@ -56,7 +65,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 8px;
+      gap: 6px;
     }
 
     .theme-btn, select {
@@ -124,10 +133,10 @@
   <header>
     <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     <div class="nav-right">
-      <nav>
+      <div class="nav-buttons">
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
-      </nav>
+      </div>
       <div class="settings">
         <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
         <select id="langSelect">
