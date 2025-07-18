@@ -1,191 +1,111 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>AutoArchive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --card-bg: #1f1f1f;
-      --accent-color: #2196f3;
-    }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #121212;
+      color: #e0e0e0;
     }
 
     header {
+      background-color: #1f1f1f;
+      padding: 20px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background-color: var(--card-bg);
     }
 
-    .logo {
-      height: 100px;
+    header img {
+      height: 50px;
     }
 
-    nav a {
-      color: var(--accent-color);
+    header nav a {
+      margin-left: 20px;
+      color: #2196f3;
       text-decoration: none;
-      margin: 0 12px;
       font-weight: bold;
     }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 30px;
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      color: #2196f3;
     }
 
-    .settings {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .theme-btn, select {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--accent-color);
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .search-bar {
-      display: flex;
-      margin-bottom: 30px;
-      gap: 10px;
-    }
-
-    .search-bar input {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    .search-bar button {
-      padding: 10px 16px;
-      background-color: var(--accent-color);
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
+    .cars-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
     }
 
     .car {
-      background-color: var(--card-bg);
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 10px;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
       transition: transform 0.2s;
     }
 
     .car:hover {
-      transform: scale(1.01);
+      transform: scale(1.02);
     }
 
     .car img {
       max-width: 100%;
-      border-radius: 8px;
+      height: auto;
+      border-radius: 6px;
       margin-top: 10px;
+    }
+
+    .vin {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="index.html">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    </a>
-    <div class="nav-right">
-      <nav>
-        <a href="#">O nas</a>
-        <a href="#">Kontakt</a>
-      </nav>
-      <div class="settings">
-        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-        <select id="langSelect">
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-        </select>
-      </div>
-    </div>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo">
+    <nav>
+      <a href="#">Kontakt</a>
+      <a href="#">O nas</a>
+    </nav>
   </header>
 
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Wyszukaj VIN..." />
-      <button onclick="searchVin()">Szukaj</button>
-    </div>
+  <h1>Historia pojazdów</h1>
 
-    <div id="carList"></div>
+  <div class="cars-container" id="carsContainer">
+    <div class="car">
+      <a href="car1.html">
+        <div class="vin">VIN: 1HGCM82633A004352</div>
+        <div>BMW 530xi</div>
+        <img src="car1.jpg" alt="Pojazd 1" />
+      </a>
+    </div>
   </div>
 
   <script>
-    const cars = [
-      {
-        vin: "WBANF73537CU21357",
-        model: "BMW 530xi 2007",
-        img: "car1-1.jpg",
-        link: "car1.html"
+    window.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("carsContainer");
+
+      const extraCar = localStorage.getItem("car2");
+      if (extraCar && container) {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = extraCar;
+        container.appendChild(wrapper);
       }
-    ];
-
-    function renderCars(filtered = cars) {
-      const list = document.getElementById("carList");
-      list.innerHTML = "";
-      filtered.forEach(car => {
-        const el = document.createElement("div");
-        el.className = "car";
-        el.innerHTML = `
-          <a href="${car.link}" style="text-decoration: none; color: inherit;">
-            <div class="vin"><strong>VIN:</strong> ${car.vin}</div>
-            <div>${car.model}</div>
-            <img src="${car.img}" alt="Miniatura pojazdu">
-          </a>
-        `;
-        list.appendChild(el);
-      });
-    }
-
-    function searchVin() {
-      const val = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = cars.filter(c => c.vin.toLowerCase().includes(val));
-      renderCars(filtered);
-    }
-
-    function toggleTheme() {
-      const root = document.documentElement;
-      const dark = getComputedStyle(root).getPropertyValue('--bg-color') === '#121212';
-      if (dark) {
-        root.style.setProperty('--bg-color', '#ffffff');
-        root.style.setProperty('--text-color', '#000000');
-        root.style.setProperty('--card-bg', '#f0f0f0');
-      } else {
-        root.style.setProperty('--bg-color', '#121212');
-        root.style.setProperty('--text-color', '#e0e0e0');
-        root.style.setProperty('--card-bg', '#1f1f1f');
-      }
-    }
-
-    renderCars();
+    });
   </script>
 </body>
 </html>
