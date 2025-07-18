@@ -5,103 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AutoArchive</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #121212;
+      background-color: #121212;
       color: #e0e0e0;
     }
+
     header {
-      background: #1a1a1a;
-      padding: 20px 40px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #333;
+      justify-content: space-between;
+      background-color: #121212;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     }
-    header img.logo {
-      height: 70px;
+
+    .logo {
+      height: 60px;
     }
+
     nav a {
+      margin-left: 25px;
       color: #2196f3;
-      margin-left: 20px;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: bold;
+      font-size: 1rem;
     }
+
     .container {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 40px auto;
       padding: 0 20px;
     }
+
     .search-bar {
       display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
-    .search-bar input {
-      width: 320px;
-      padding: 12px 16px;
-      border: 1px solid #555;
-      background: #1e1e1e;
-      color: #fff;
-      border-radius: 8px 0 0 8px;
-      font-size: 16px;
-    }
-    .search-bar button {
-      padding: 12px 20px;
+
+    #vinInput {
+      flex: 1;
+      padding: 10px;
       border: none;
+      border-radius: 4px 0 0 4px;
+      font-size: 1rem;
+    }
+
+    #searchBtn {
+      padding: 10px 20px;
       background-color: #2196f3;
       color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
       font-weight: bold;
-      border-radius: 0 8px 8px 0;
       cursor: pointer;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+
+    .car {
+      background-color: #1f1f1f;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
     }
-    .card {
-      background: #1e1e1e;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s ease;
+
+    .car img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
     }
-    .card:hover {
-      transform: translateY(-6px);
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card-content {
-      padding: 20px;
-    }
-    .card-content h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    .card-content p {
-      color: #aaa;
-      font-size: 14px;
-    }
-    footer {
-      text-align: center;
-      font-size: 14px;
-      padding: 30px 0;
-      color: #777;
-      border-top: 1px solid #333;
+
+    .vin {
+      font-weight: bold;
+      color: #bbb;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html"><img src="08489B40-060A-461B-A811-D624F5CF4B1A.png" alt="AutoArchive logo" class="logo" /></a>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     <nav>
       <a href="#">O nas</a>
       <a href="#">Kontakt</a>
@@ -110,34 +94,55 @@
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinSearch" placeholder="Wyszukaj VIN..." />
-      <button onclick="searchVIN()">Szukaj</button>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN..."/>
+      <button id="searchBtn">Szukaj</button>
     </div>
-
-    <div class="grid" id="carGrid">
-      <a class="card" href="car1.html">
-        <img src="car1.jpg" alt="BMW 530xi" />
-        <div class="card-content">
-          <h3>BMW 530xi</h3>
-          <p>VIN: WBAFU7C5XDDU76492</p>
-        </div>
-      </a>
-    </div>
+    <div id="carList"></div>
   </div>
 
-  <footer>
-    &copy; 2025 AutoArchive – Wszystkie prawa zastrzeżone.
-  </footer>
-
   <script>
-    function searchVIN() {
-      const input = document.getElementById('vinSearch').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        const vin = card.querySelector('p').innerText.toLowerCase();
-        card.style.display = vin.includes(input) ? 'block' : 'none';
-      });
+    const cars = [
+      {
+        vin: "1HGCM82633A004352",
+        model: "Honda Accord 2003",
+        img: "car1.jpg"
+      },
+      {
+        vin: "1C4RJFBG0FC625797",
+        model: "Jeep Grand Cherokee 2015",
+        img: "car2.jpg"
+      },
+      {
+        vin: "WDBUF56X78B278934",
+        model: "Mercedes E350 2008",
+        img: "car3.jpg"
+      },
+    ];
+
+    const carList = document.getElementById("carList");
+
+    function renderCars(filter = "") {
+      carList.innerHTML = "";
+      cars
+        .filter(car => car.vin.includes(filter.toUpperCase()))
+        .forEach(car => {
+          const el = document.createElement("div");
+          el.className = "car";
+          el.innerHTML = `
+            <div class="vin">VIN: ${car.vin}</div>
+            <div>${car.model}</div>
+            <img src="${car.img}" alt="Zdjęcie auta" />
+          `;
+          carList.appendChild(el);
+        });
     }
+
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const value = document.getElementById("vinInput").value;
+      renderCars(value);
+    });
+
+    renderCars(); // domyślnie pokaż wszystkie
   </script>
 
 </body>
