@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>AutoArchive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -21,7 +21,7 @@
     }
 
     header img {
-      height: 50px;
+      height: 80px;
     }
 
     header nav a {
@@ -35,6 +35,30 @@
       text-align: center;
       margin-top: 40px;
       color: #2196f3;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .search-box input {
+      padding: 10px;
+      border-radius: 6px 0 0 6px;
+      border: none;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      padding: 10px 20px;
+      border-radius: 0 6px 6px 0;
+      border: none;
+      background-color: #2196f3;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
     }
 
     .cars-container {
@@ -76,7 +100,9 @@
 </head>
 <body>
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo">
+    <a href="index.html">
+      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo">
+    </a>
     <nav>
       <a href="#">Kontakt</a>
       <a href="#">O nas</a>
@@ -84,6 +110,11 @@
   </header>
 
   <h1>Historia pojazdów</h1>
+
+  <div class="search-box">
+    <input type="text" id="vinSearch" placeholder="Wpisz VIN pojazdu">
+    <button onclick="searchVIN()">Szukaj</button>
+  </div>
 
   <div class="cars-container" id="carsContainer">
     <div class="car">
@@ -96,6 +127,15 @@
   </div>
 
   <script>
+    function searchVIN() {
+      const vin = document.getElementById("vinSearch").value.toLowerCase();
+      const cars = document.querySelectorAll(".car");
+      cars.forEach(car => {
+        const vinText = car.querySelector(".vin").textContent.toLowerCase();
+        car.style.display = vinText.includes(vin) ? "block" : "none";
+      });
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("carsContainer");
 
