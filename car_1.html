@@ -3,145 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BMW 530xi – AutoArchive</title>
+  <title>AutoArchive – Szczegóły pojazdu</title>
   <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1f1f1f;
+      --accent-color: #2196f3;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
-    header {
-      background-color: #1f3b6d;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    header img {
-      height: 40px;
-      cursor: pointer;
-    }
-    nav a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+
     .container {
       max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 40px auto;
+      padding: 0 20px;
     }
+
     h1 {
-      margin-top: 0;
+      color: var(--accent-color);
     }
-    .gallery {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .gallery img {
-      width: 32%;
-      border-radius: 4px;
-      object-fit: cover;
-    }
+
     .details {
-      line-height: 1.7;
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
     }
-    .details span {
-      font-weight: bold;
+
+    .info {
+      margin-bottom: 10px;
     }
-    .remove-btn {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #e63946;
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .delete-btn {
+      background-color: red;
       color: white;
       border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .payment-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .payment-box {
-      background: white;
-      padding: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
       border-radius: 6px;
-      text-align: center;
-      width: 300px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-    .footer {
-      text-align: center;
-      color: #777;
-      padding: 20px;
-      font-size: 14px;
+
+    .delete-btn:hover {
+      background-color: darkred;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <a href="index.html"><img src="IMG_1421.png" alt="AutoArchive Logo" /></a>
-    <nav>
-      <a href="#">O nas</a>
-      <a href="#">Kontakt</a>
-      <a href="#">FAQ</a>
-    </nav>
-  </header>
-
   <div class="container">
-    <h1>BMW 530xi – Historia pojazdu</h1>
-
-    <div class="gallery">
-      <img src="car1.jpg" alt="Zdjęcie BMW 1" />
-      <img src="car1b.jpg" alt="Zdjęcie BMW 2" />
-      <img src="car1c.jpg" alt="Zdjęcie BMW 3" />
-    </div>
+    <h1>BMW 530xi 2007</h1>
 
     <div class="details">
-      <p><span>VIN:</span> WBAFU7C5XDDU76492</p>
-      <p><span>Cena końcowa:</span> $6,700</p>
-      <p><span>Miejsce zakupu:</span> New Jersey, Trenton</p>
-      <p><span>Uszkodzenia:</span> Front End, Minor Dents/Scratches</p>
-      <p><span>Tytuł pojazdu:</span> Salvage</p>
+      <div class="info"><strong>VIN:</strong> WBANF73537CU21357</div>
+      <div class="info"><strong>Cena:</strong> $5,600</div>
+      <div class="info"><strong>Miejsce zakupu:</strong> Kalifornia, Los Angeles</div>
+      <div class="info"><strong>Uszkodzenia:</strong> Przód + bok kierowcy</div>
+      <div class="info"><strong>Tytuł:</strong> Salvage</div>
     </div>
 
-    <button class="remove-btn" onclick="showPayment()">Usuń historię</button>
-  </div>
-
-  <div class="payment-modal" id="paymentModal">
-    <div class="payment-box">
-      <h2>Opłać usunięcie</h2>
-      <p>149 zł za usunięcie historii</p>
-      <button onclick="hidePayment()">Zamknij</button>
+    <div class="gallery">
+      <img src="car1-1.jpg" alt="Zdjęcie 1 pojazdu">
+      <img src="car1-2.jpg" alt="Zdjęcie 2 pojazdu">
+      <img src="car1-3.jpg" alt="Zdjęcie 3 pojazdu">
+      <img src="car1-4.jpg" alt="Zdjęcie 4 pojazdu">
     </div>
+
+    <a href="payment.html"><button class="delete-btn">Usuń historię</button></a>
   </div>
-
-  <div class="footer">
-    © 2025 AutoArchive. Wszelkie prawa zastrzeżone.
-  </div>
-
-  <script>
-    function showPayment() {
-      document.getElementById("paymentModal").style.display = "flex";
-    }
-    function hidePayment() {
-      document.getElementById("paymentModal").style.display = "none";
-    }
-  </script>
-
 </body>
 </html>
