@@ -30,25 +30,23 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 15px 30px;
       background-color: var(--bg-color);
-      flex-wrap: wrap;
+      padding: 15px 30px;
     }
 
     .logo {
       height: 120px;
     }
 
-    .nav-right {
+    .nav-left {
       display: flex;
-      gap: 30px;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .nav-buttons {
       display: flex;
       gap: 20px;
-      margin-top: 12px;
     }
 
     .nav-buttons a {
@@ -64,7 +62,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 8px;
+      gap: 10px;
     }
 
     .theme-btn, select {
@@ -130,23 +128,23 @@
 <body>
 
   <header>
-    <a href="index.html">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    </a>
-    <div class="nav-right">
+    <div class="nav-left">
+      <a href="index.html">
+        <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
+      </a>
       <div class="nav-buttons">
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
       </div>
-      <div class="settings">
-        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-        <select id="langSelect">
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-        </select>
-      </div>
+    </div>
+    <div class="settings">
+      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+      <select id="langSelect">
+        <option value="pl">PL</option>
+        <option value="en">EN</option>
+        <option value="de">DE</option>
+        <option value="ru">RU</option>
+      </select>
     </div>
   </header>
 
@@ -168,58 +166,4 @@
       },
       {
         vin: "1C4RJFBG0FC625797",
-        model: "Jeep Grand Cherokee 2015",
-        img: "car2.jpg",
-        link: "car2.html"
-      },
-      {
-        vin: "WDBUF56X78B278934",
-        model: "Mercedes E350 2008",
-        img: "car3.jpg",
-        link: "car3.html"
-      },
-    ];
-
-    const carList = document.getElementById("carList");
-
-    function renderCars(filter = "") {
-      carList.innerHTML = "";
-      cars
-        .filter(car => car.vin.includes(filter.toUpperCase()))
-        .forEach(car => {
-          const el = document.createElement("div");
-          el.className = "car";
-          el.innerHTML = `
-            <div class="vin">VIN: ${car.vin}</div>
-            <div>${car.model}</div>
-            <img src="${car.img}" alt="Zdjęcie auta" />
-          `;
-          el.addEventListener("click", () => {
-            window.location.href = car.link;
-          });
-          carList.appendChild(el);
-        });
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle("light-mode");
-      const isLight = document.body.classList.contains("light-mode");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "light") {
-        document.body.classList.add("light-mode");
-      }
-      renderCars();
-    });
-
-    document.getElementById("searchBtn").addEventListener("click", () => {
-      const value = document.getElementById("vinInput").value;
-      renderCars(value);
-    });
-  </script>
-
-</body>
-</html>
+        model: "Jeep Grand Cherokee 
