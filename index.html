@@ -28,10 +28,10 @@
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background-color: var(--bg-color);
+      align-items: flex-start;
       padding: 15px 30px;
+      background-color: var(--bg-color);
       flex-wrap: wrap;
     }
 
@@ -41,9 +41,14 @@
 
     .nav-right {
       display: flex;
-      align-items: center;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .nav-buttons {
+      display: flex;
       gap: 20px;
-      flex-wrap: wrap;
+      margin-top: 12px;
     }
 
     .nav-buttons a {
@@ -53,7 +58,13 @@
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem;
+    }
+
+    .settings {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
     }
 
     .theme-btn, select {
@@ -123,16 +134,18 @@
       <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     </a>
     <div class="nav-right">
-      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-      <select id="langSelect">
-        <option value="pl">PL</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-        <option value="ru">RU</option>
-      </select>
       <div class="nav-buttons">
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
+      </div>
+      <div class="settings">
+        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+        <select id="langSelect">
+          <option value="pl">PL</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+        </select>
       </div>
     </div>
   </header>
