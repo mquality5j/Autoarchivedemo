@@ -32,34 +32,49 @@
       justify-content: space-between;
       background-color: var(--bg-color);
       padding: 15px 30px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      flex-wrap: wrap;
     }
 
     .logo {
       height: 120px;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     nav a {
-      margin-left: 25px;
       color: var(--accent-color);
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
     }
 
-    .tools {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    select, .theme-btn {
+    .theme-btn {
       background-color: var(--card-bg);
       color: var(--text-color);
       border: 1px solid var(--accent-color);
       padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
+    }
+
+    .language-select {
+      width: 100%;
+      text-align: right;
+      padding-right: 30px;
+      margin-top: 8px;
+    }
+
+    select {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--accent-color);
+      padding: 6px 10px;
+      border-radius: 6px;
       font-weight: bold;
     }
 
@@ -116,18 +131,20 @@
 
   <header>
     <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    <div class="tools">
+    <div class="nav-right">
+      <nav>
+        <a href="#">O nas</a>
+        <a href="#">Kontakt</a>
+      </nav>
+      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+    </div>
+    <div class="language-select">
       <select id="langSelect">
         <option value="pl">PL</option>
         <option value="en">EN</option>
         <option value="de">DE</option>
         <option value="ru">RU</option>
       </select>
-      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-      <nav>
-        <a href="#">O nas</a>
-        <a href="#">Kontakt</a>
-      </nav>
     </div>
   </header>
 
@@ -185,7 +202,7 @@
       renderCars(value);
     });
 
-    renderCars(); // pokaż wszystkie na start
+    renderCars(); // domyślnie pokaż wszystkie
   </script>
 
 </body>
