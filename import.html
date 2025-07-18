@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dodaj pojazd - AutoArchive</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      color: #2196f3;
+    }
+    form {
+      max-width: 800px;
+      margin: auto;
+      background-color: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      background-color: #2c2c2c;
+      color: #e0e0e0;
+      font-size: 1rem;
+    }
+    input[type="file"] {
+      background-color: #2c2c2c;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dodaj pojazd</h1>
+  <form onsubmit="event.preventDefault(); alert('Pojazd został dodany (testowo)');">
+    <label for="vin">VIN:</label>
+    <input type="text" id="vin" name="vin" required>
+
+    <label for="model">Marka i Model:</label>
+    <input type="text" id="model" name="model" required>
+
+    <label for="year">Rok produkcji:</label>
+    <input type="text" id="year" name="year">
+
+    <label for="mileage">Przebieg:</label>
+    <input type="text" id="mileage" name="mileage">
+
+    <label for="fuel">Typ paliwa:</label>
+    <input type="text" id="fuel" name="fuel">
+
+    <label for="title">Tytuł pojazdu:</label>
+    <input type="text" id="title" name="title">
+
+    <label for="location">Miejsce zakupu (stan i miasto):</label>
+    <input type="text" id="location" name="location">
+
+    <label for="date">Data aukcji:</label>
+    <input type="text" id="date" name="date">
+
+    <label for="price">Cena sprzedaży:</label>
+    <input type="text" id="price" name="price">
+
+    <label for="damage">Opis uszkodzeń:</label>
+    <textarea id="damage" name="damage" rows="3"></textarea>
+
+    <label for="link">Link do aukcji:</label>
+    <input type="text" id="link" name="link">
+
+    <label for="images">Zdjęcia pojazdu:</label>
+    <input type="file" id="images" name="images" multiple>
+
+    <button type="submit">Dodaj pojazd</button>
+  </form>
+</body>
+</html>
