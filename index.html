@@ -42,7 +42,7 @@
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 30px;
     }
 
     nav a {
@@ -52,29 +52,20 @@
       font-size: 1rem;
     }
 
-    .theme-btn {
+    .settings {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .theme-btn, select {
       background-color: var(--card-bg);
       color: var(--text-color);
       border: 1px solid var(--accent-color);
       padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
-    }
-
-    .language-select {
-      width: 100%;
-      text-align: right;
-      padding-right: 30px;
-      margin-top: 8px;
-    }
-
-    select {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--accent-color);
-      padding: 6px 10px;
-      border-radius: 6px;
       font-weight: bold;
     }
 
@@ -136,15 +127,15 @@
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
       </nav>
-      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-    </div>
-    <div class="language-select">
-      <select id="langSelect">
-        <option value="pl">PL</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-        <option value="ru">RU</option>
-      </select>
+      <div class="settings">
+        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+        <select id="langSelect">
+          <option value="pl">PL</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+        </select>
+      </div>
     </div>
   </header>
 
