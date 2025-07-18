@@ -104,6 +104,7 @@
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
     }
 
     .car img {
@@ -121,9 +122,7 @@
 <body>
 
   <header>
-    <a href="index.html">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    </a>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     <div class="nav-right">
       <nav>
         <a href="#">O nas</a>
@@ -154,17 +153,20 @@
       {
         vin: "1HGCM82633A004352",
         model: "Honda Accord 2003",
-        img: "car1.jpg"
+        img: "car1.jpg",
+        link: "car1.html"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
-        img: "car2.jpg"
+        img: "car2.jpg",
+        link: "car2.html"
       },
       {
         vin: "WDBUF56X78B278934",
         model: "Mercedes E350 2008",
-        img: "car3.jpg"
+        img: "car3.jpg",
+        link: "car3.html"
       },
     ];
 
@@ -182,6 +184,9 @@
             <div>${car.model}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
+          el.addEventListener("click", () => {
+            window.location.href = car.link;
+          });
           carList.appendChild(el);
         });
     }
@@ -192,7 +197,6 @@
       localStorage.setItem("theme", isLight ? "light" : "dark");
     }
 
-    // Wczytaj zapisany motyw przy ładowaniu strony
     window.addEventListener("DOMContentLoaded", () => {
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme === "light") {
