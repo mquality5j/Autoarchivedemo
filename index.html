@@ -6,9 +6,9 @@
   <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #000000;
+      --bg-color: #121212;
       --text-color: #e0e0e0;
-      --card-bg: #1c1c1c;
+      --card-bg: #1f1f1f;
       --accent-color: #2196f3;
     }
 
@@ -28,41 +28,35 @@
 
     header {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
       background-color: var(--bg-color);
       padding: 15px 30px;
+      flex-wrap: wrap;
     }
 
     .logo {
       height: 120px;
     }
 
-    .nav-left {
+    .nav-right {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 30px;
     }
 
-    .nav-buttons {
-      display: flex;
-      gap: 20px;
-    }
-
-    .nav-buttons a {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 5px;
+    nav a {
+      color: var(--accent-color);
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
     }
 
     .settings {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
+      gap: 8px;
     }
 
     .theme-btn, select {
@@ -110,7 +104,6 @@
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-      cursor: pointer;
     }
 
     .car img {
@@ -128,29 +121,27 @@
 <body>
 
   <header>
-    <div class="nav-left">
-      <a href="index.html">
-        <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-      </a>
-      <div class="nav-buttons">
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
+    <div class="nav-right">
+      <nav>
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
+      </nav>
+      <div class="settings">
+        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+        <select id="langSelect">
+          <option value="pl">PL</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+        </select>
       </div>
-    </div>
-    <div class="settings">
-      <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-      <select id="langSelect">
-        <option value="pl">PL</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-        <option value="ru">RU</option>
-      </select>
     </div>
   </header>
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację lub tytuł..."/>
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
@@ -161,21 +152,24 @@
       {
         vin: "1HGCM82633A004352",
         model: "Honda Accord 2003",
-        img: "car1.jpg",
-        link: "car1.html"
+        location: "CA, Los Angeles",
+        title: "Clean",
+        img: "car1.jpg"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
-        img: "car2.jpg",
-        link: "car2.html"
+        location: "TX, Dallas",
+        title: "Salvage",
+        img: "car2.jpg"
       },
       {
         vin: "WDBUF56X78B278934",
         model: "Mercedes E350 2008",
-        img: "car3.jpg",
-        link: "car3.html"
-      },
+        location: "FL, Miami",
+        title: "Rebuilt",
+        img: "car3.jpg"
+      }
     ];
 
     const carList = document.getElementById("carList");
@@ -183,40 +177,36 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car => car.vin.includes(filter.toUpperCase()))
+        .filter(car => {
+          const f = filter.toLowerCase();
+          return car.vin.toLowerCase().includes(f) ||
+                 car.model.toLowerCase().includes(f) ||
+                 car.location.toLowerCase().includes(f) ||
+                 car.title.toLowerCase().includes(f);
+        })
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
           el.innerHTML = `
             <div class="vin">VIN: ${car.vin}</div>
             <div>${car.model}</div>
+            <div>${car.location} – ${car.title}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
-          el.addEventListener("click", () => {
-            window.location.href = car.link;
-          });
           carList.appendChild(el);
         });
     }
 
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
-      const isLight = document.body.classList.contains("light-mode");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
     }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "light") {
-        document.body.classList.add("light-mode");
-      }
-      renderCars();
-    });
 
     document.getElementById("searchBtn").addEventListener("click", () => {
       const value = document.getElementById("vinInput").value;
       renderCars(value);
     });
+
+    renderCars(); // pokaż wszystkie na start
   </script>
 
 </body>
