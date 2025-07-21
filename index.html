@@ -37,7 +37,6 @@
 
     .logo {
       height: 120px;
-      cursor: pointer;
     }
 
     .nav-right {
@@ -105,7 +104,6 @@
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-      cursor: pointer;
     }
 
     .car img {
@@ -118,12 +116,16 @@
       font-weight: bold;
       color: #bbb;
     }
+
+    #paypal-button-container {
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" onclick="location.href='index.html'" />
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     <div class="nav-right">
       <nav>
         <a href="#">O nas</a>
@@ -147,54 +149,26 @@
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
+
+    <div id="paypal-button-container"></div>
   </div>
 
   <script>
-    const translations = {
-      pl: {
-        search: "Szukaj",
-        inputPlaceholder: "Wpisz VIN...",
-        about: "O nas",
-        contact: "Kontakt"
-      },
-      en: {
-        search: "Search",
-        inputPlaceholder: "Enter VIN...",
-        about: "About",
-        contact: "Contact"
-      },
-      de: {
-        search: "Suchen",
-        inputPlaceholder: "VIN eingeben...",
-        about: "Über uns",
-        contact: "Kontakt"
-      },
-      ru: {
-        search: "Поиск",
-        inputPlaceholder: "Введите VIN...",
-        about: "О нас",
-        contact: "Контакт"
-      }
-    };
-
     const cars = [
       {
         vin: "1HGCM82633A004352",
         model: "Honda Accord 2003",
-        img: "car1.jpg",
-        link: "car1.html"
+        img: "car1.jpg"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
-        img: "car2.jpg",
-        link: "car2.html"
+        img: "car2.jpg"
       },
       {
         vin: "WDBUF56X78B278934",
         model: "Mercedes E350 2008",
-        img: "car3.jpg",
-        link: "car3.html"
+        img: "car3.jpg"
       },
     ];
 
@@ -212,9 +186,6 @@
             <div>${car.model}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
-          el.addEventListener("click", () => {
-            location.href = car.link;
-          });
           carList.appendChild(el);
         });
     }
@@ -228,15 +199,28 @@
       renderCars(value);
     });
 
-    document.getElementById("langSelect").addEventListener("change", (e) => {
-      const lang = e.target.value;
-      document.getElementById("searchBtn").textContent = translations[lang].search;
-      document.getElementById("vinInput").placeholder = translations[lang].inputPlaceholder;
-      document.querySelectorAll("nav a")[0].textContent = translations[lang].about;
-      document.querySelectorAll("nav a")[1].textContent = translations[lang].contact;
-    });
-
     renderCars(); // domyślnie pokaż wszystkie
+  </script>
+
+  <!-- PayPal SDK (sandbox) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '5.00'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Dziękujemy, ' + details.payer.name.given_name + '! Płatność zakończona.');
+        });
+      }
+    }).render('#paypal-button-container');
   </script>
 
 </body>
