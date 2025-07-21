@@ -3,227 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoArchive – Szczegóły pojazdu</title>
+  <title>AutoArchive – BMW 530xi</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
-      color: #e0e0e0;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     header {
-      padding: 20px 30px;
+      background-color: #121212;
+      padding: 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #444;
     }
 
     header img {
-      height: 100px;
+      height: 80px;
+      cursor: pointer;
     }
 
     main {
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 1000px;
+      margin: 30px auto;
       padding: 20px;
     }
 
-    h2 {
-      border-bottom: 1px solid #333;
-      padding-bottom: 6px;
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
     }
 
-    .section {
+    .info-block {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
       margin-bottom: 30px;
+      box-shadow: 0 0 10px #00000060;
     }
 
     .gallery {
       display: flex;
       overflow-x: auto;
-      gap: 15px;
+      gap: 10px;
     }
 
     .gallery img {
-      height: 200px;
-      border-radius: 6px;
+      height: 180px;
+      border-radius: 8px;
+      border: 2px solid #444;
     }
 
-    .pay-box {
-      background: #1f1f1f;
-      padding: 20px;
-      border-radius: 10px;
+    .pay-btn {
+      background-color: #0070ba;
+      color: white;
+      padding: 12px 25px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       margin-top: 20px;
     }
 
-    .pay-box button {
-      background: #2196f3;
-      color: white;
-      padding: 10px 20px;
+    .pay-btn:hover {
+      background-color: #005ea6;
+    }
+
+    iframe {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 400px;
+      height: 100px;
       border: none;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    select {
-      margin-top: 10px;
-      padding: 8px;
-      background: #1f1f1f;
-      color: #e0e0e0;
-      border: 1px solid #2196f3;
-      border-radius: 4px;
-    }
-
-    a {
-      color: #2196f3;
-      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive" />
-    </a>
-    <select id="langSelect">
-      <option value="pl">PL</option>
-      <option value="en">EN</option>
-      <option value="de">DE</option>
-      <option value="ru">RU</option>
-    </select>
+    <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" /></a>
   </header>
 
   <main>
-    <h1 id="car-title">BMW 530xi 2006</h1>
+    <h1>BMW 530xi – Szczegóły pojazdu</h1>
 
-    <div class="section" id="auction-info">
-      <h2 data-tr="auction_info">Informacje aukcyjne</h2>
-      <p><strong data-tr="lot">Numer licytacji:</strong> 39381134</p>
-      <p><strong data-tr="location">Lokalizacja:</strong> Newburgh, New York</p>
-      <p><strong data-tr="sale_date">Data sprzedaży:</strong> 2025-07-21</p>
-      <p><strong data-tr="title">Tytuł:</strong> Salvage Title</p>
-      <p><strong data-tr="damage">Uszkodzenia:</strong> Front End, Minor Dents/Scratches</p>
+    <div class="info-block">
+      <h2>Dane techniczne</h2>
+      <p><strong>Rok:</strong> 2007</p>
+      <p><strong>Silnik:</strong> 3.0L L6 DOHC 24V</p>
+      <p><strong>Paliwo:</strong> Benzyna</p>
+      <p><strong>Skrzynia:</strong> Automatyczna</p>
+      <p><strong>Napęd:</strong> AWD</p>
+      <p><strong>VIN:</strong> WBANF73587CU21843</p>
     </div>
 
-    <div class="section" id="tech-info">
-      <h2 data-tr="tech_info">Dane techniczne</h2>
-      <p><strong data-tr="vin">VIN:</strong> WBANE73566CM37989</p>
-      <p><strong data-tr="engine">Silnik:</strong> 3.0L 6</p>
-      <p><strong data-tr="drive">Napęd:</strong> AWD</p>
-      <p><strong data-tr="fuel">Paliwo:</strong> Benzyna</p>
-      <p><strong data-tr="odo">Przebieg:</strong> 156,505 mil</p>
+    <div class="info-block">
+      <h2>Informacje z aukcji</h2>
+      <p><strong>Lokalizacja:</strong> New York, NY</p>
+      <p><strong>Status tytułu:</strong> Clean</p>
+      <p><strong>Typ uszkodzeń:</strong> Przód, zawieszenie</p>
+      <p><strong>Cena sprzedaży:</strong> $3,100</p>
+      <p><strong>Źródło aukcji:</strong> <a href="https://www.copart.com/lot/39381134" target="_blank" style="color: #4faaf4;">Zobacz aukcję</a></p>
     </div>
 
-    <div class="section" id="gallery">
-      <h2 data-tr="photos">Zdjęcia</h2>
+    <div class="info-block">
+      <h2>Galeria zdjęć</h2>
       <div class="gallery">
-        <img src="car1-1.jpg" alt="Auto 1" />
-        <img src="car1-2.jpg" alt="Auto 2" />
-        <img src="car1-3.jpg" alt="Auto 3" />
-        <img src="car1-4.jpg" alt="Auto 4" />
+        <img src="car1-1.jpg" alt="BMW 530xi 1" />
+        <img src="car1-2.jpg" alt="BMW 530xi 2" />
+        <img src="car1-3.jpg" alt="BMW 530xi 3" />
+        <img src="car1-4.jpg" alt="BMW 530xi 4" />
       </div>
     </div>
 
-    <div class="section">
-      <a href="https://www.copart.com/lot/39381134" target="_blank" data-tr="view_auction">Zobacz aukcję źródłową</a>
+    <div class="info-block">
+      <h2>Usuń historię pojazdu</h2>
+      <p>Po dokonaniu płatności ogłoszenie zostanie trwale usunięte z publicznego widoku.</p>
+      <button class="pay-btn" onclick="showPayment()">Usuń historię</button>
+      <div id="paymentContainer" style="display:none;">
+        <iframe src="https://www.sandbox.paypal.com/buttons/checkout?amount=5&currency=USD"></iframe>
+      </div>
     </div>
 
-    <div class="pay-box">
-      <p data-tr="pay_text">Chcesz usunąć historię tego pojazdu?</p>
-      <button onclick="alert('Płatność testowa!')" data-tr="pay_btn">Usuń historię</button>
-    </div>
   </main>
 
   <script>
-    const translations = {
-      pl: {
-        auction_info: "Informacje aukcyjne",
-        tech_info: "Dane techniczne",
-        photos: "Zdjęcia",
-        view_auction: "Zobacz aukcję źródłową",
-        pay_text: "Chcesz usunąć historię tego pojazdu?",
-        pay_btn: "Usuń historię",
-        lot: "Numer licytacji",
-        location: "Lokalizacja",
-        sale_date: "Data sprzedaży",
-        title: "Tytuł",
-        damage: "Uszkodzenia",
-        vin: "VIN",
-        engine: "Silnik",
-        drive: "Napęd",
-        fuel: "Paliwo",
-        odo: "Przebieg"
-      },
-      en: {
-        auction_info: "Auction Information",
-        tech_info: "Technical Specifications",
-        photos: "Photos",
-        view_auction: "View original auction",
-        pay_text: "Do you want to remove this vehicle's history?",
-        pay_btn: "Remove History",
-        lot: "Lot Number",
-        location: "Location",
-        sale_date: "Sale Date",
-        title: "Title",
-        damage: "Damage",
-        vin: "VIN",
-        engine: "Engine",
-        drive: "Drive",
-        fuel: "Fuel",
-        odo: "Mileage"
-      },
-      de: {
-        auction_info: "Auktionsinformationen",
-        tech_info: "Technische Daten",
-        photos: "Fotos",
-        view_auction: "Originalauktion ansehen",
-        pay_text: "Möchten Sie den Verlauf dieses Fahrzeugs entfernen?",
-        pay_btn: "Verlauf löschen",
-        lot: "Auktionsnummer",
-        location: "Standort",
-        sale_date: "Verkaufsdatum",
-        title: "Titel",
-        damage: "Schäden",
-        vin: "FIN",
-        engine: "Motor",
-        drive: "Antrieb",
-        fuel: "Kraftstoff",
-        odo: "Kilometerstand"
-      },
-      ru: {
-        auction_info: "Информация об аукционе",
-        tech_info: "Технические характеристики",
-        photos: "Фотографии",
-        view_auction: "Посмотреть оригинал аукциона",
-        pay_text: "Удалить историю автомобиля?",
-        pay_btn: "Удалить историю",
-        lot: "Номер лота",
-        location: "Местоположение",
-        sale_date: "Дата продажи",
-        title: "Заголовок",
-        damage: "Повреждения",
-        vin: "VIN",
-        engine: "Двигатель",
-        drive: "Привод",
-        fuel: "Топливо",
-        odo: "Пробег"
-      }
-    };
-
-    const langSelect = document.getElementById("langSelect");
-
-    langSelect.addEventListener("change", () => {
-      const lang = langSelect.value;
-      document.querySelectorAll("[data-tr]").forEach(el => {
-        const key = el.getAttribute("data-tr");
-        if (translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-    });
+    function showPayment() {
+      document.getElementById('paymentContainer').style.display = 'block';
+    }
   </script>
 
 </body>
