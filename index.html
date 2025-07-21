@@ -2,23 +2,21 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoArchive PRO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #0d0d0d;
+      --bg-color: #0e0e0e;
+      --text-color: #ffffff;
       --card-bg: #1a1a1a;
-      --accent-blue: #1e90ff;
-      --accent-red: #ff3c38;
-      --text-light: #f0f0f0;
-      --text-muted: #aaaaaa;
+      --accent-color: #2196f3;
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
-      color: var(--text-light);
+      color: var(--text-color);
     }
 
     header {
@@ -26,166 +24,198 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
-      background-color: var(--card-bg);
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      background-color: var(--bg-color);
+      border-bottom: 1px solid #333;
+      flex-wrap: wrap;
     }
 
     .logo {
       height: 100px;
     }
 
-    .nav-right {
+    .nav {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 25px;
     }
 
-    nav a {
-      color: var(--accent-blue);
+    .nav a {
+      color: var(--accent-color);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .settings {
       display: flex;
       flex-direction: column;
-      gap: 10px;
       align-items: flex-end;
+      gap: 10px;
     }
 
     .theme-btn, select {
-      background: none;
-      color: var(--text-light);
-      border: 1px solid var(--accent-blue);
-      padding: 6px 12px;
-      border-radius: 6px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--accent-color);
+      padding: 5px 12px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    .hero {
+    .main {
       text-align: center;
-      padding: 50px 20px 30px;
+      padding: 50px 20px 20px;
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      color: var(--accent-blue);
-      margin-bottom: 10px;
+    .main h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-    }
-
-    .counter {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 1.5rem;
-      color: var(--accent-red);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .search-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
       justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    #vinInput {
+      padding: 12px;
+      font-size: 1rem;
+      width: 250px;
+      border-radius: 6px 0 0 6px;
+      border: none;
+      outline: none;
+    }
+
+    #searchBtn {
+      padding: 12px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+
+    .cars {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
     }
 
     .car {
       background-color: var(--card-bg);
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 20px;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
-      transition: transform 0.3s;
+      padding: 15px;
+      border-radius: 8px;
+      width: 280px;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
     .car:hover {
-      transform: translateY(-5px);
+      transform: scale(1.03);
     }
 
     .car img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 12px;
+      width: 100%;
+      border-radius: 6px;
     }
 
-    .car h3 {
-      color: var(--accent-blue);
-      margin: 0;
+    .car-desc {
+      margin-top: 10px;
+      font-weight: 600;
     }
 
-    .car p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
+    .panels {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px 20px 60px;
+      flex-wrap: wrap;
     }
 
-    footer {
+    .panel {
+      background-color: #1e88e5;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
       text-align: center;
-      padding: 30px;
-      margin-top: 40px;
-      color: var(--text-muted);
-      border-top: 1px solid #333;
-      background-color: #0f0f0f;
+      font-weight: bold;
+    }
+
+    .panel:nth-child(2) {
+      background-color: #43a047;
+    }
+
+    .panel:nth-child(3) {
+      background-color: #e53935;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    <div class="nav-right">
-      <nav>
-        <a href="#">O nas</a>
-        <a href="#">Kontakt</a>
-      </nav>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="Logo" class="logo" />
+    <div style="flex-grow: 1;"></div>
+    <div class="nav">
+      <a href="#">O nas</a>
+      <a href="#">Kontakt</a>
       <div class="settings">
-        <button class="theme-btn">Tryb</button>
-        <select>
-          <option>PL</option>
-          <option>EN</option>
-          <option>DE</option>
-          <option>RU</option>
+        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
+        <select id="langSelect">
+          <option value="pl">PL</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
         </select>
       </div>
     </div>
   </header>
 
-  <div class="hero">
-    <h1>AutoArchive PRO</h1>
-    <p>Sprawdź historię pojazdu – bezpiecznie, szybko, profesjonalnie</p>
-    <div class="counter">Już 13 549 sprawdzonych pojazdów</div>
+  <div class="main">
+    <h1>Wyszukaj samochód</h1>
+    <div class="search-bar">
+      <input type="text" id="vinInput" placeholder="Wpisz VIN..." />
+      <button id="searchBtn">Szukaj</button>
+    </div>
+
+    <div class="cars">
+      <div class="car" onclick="location.href='car1.html'">
+        <img src="IMG_1462.jpeg" alt="BMW 530xi" />
+        <div class="car-desc">BMW 530xi 2008</div>
+      </div>
+      <div class="car" onclick="location.href='car2.html'">
+        <img src="car2.jpg" alt="Jeep Cherokee" />
+        <div class="car-desc">Jeep Grand Cherokee 2015</div>
+      </div>
+      <div class="car" onclick="location.href='car3.html'">
+        <img src="car3.jpg" alt="Mercedes E350" />
+        <div class="car-desc">Mercedes E350 2008</div>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">Dlaczego warto nas wybrać?</div>
+      <div class="panel">12 593 usuniętych wpisów</div>
+      <div class="panel">Szybko, prosto, bezpiecznie</div>
+    </div>
   </div>
 
-  <div class="container">
-    <div class="car">
-      <img src="IMG_1462.jpeg" alt="BMW 530xi">
-      <h3>BMW 530xi 2007</h3>
-      <p>VIN: WBAPT73567CX06384</p>
-      <p>Uszkodzenia: FRONT END<br>Miejsce: Newburgh, NY</p>
-    </div>
-    <div class="car">
-      <img src="car2.jpg" alt="Mercedes E350">
-      <h3>Mercedes E350 2008</h3>
-      <p>VIN: WDBUF56X78B278934</p>
-      <p>Uszkodzenia: Rear & Side<br>Miejsce: Miami, FL</p>
-    </div>
-    <div class="car">
-      <img src="car3.jpg" alt="Jeep Grand Cherokee">
-      <h3>Jeep Grand Cherokee 2015</h3>
-      <p>VIN: 1C4RJFBG0FC625797</p>
-      <p>Uszkodzenia: ALL OVER<br>Miejsce: Houston, TX</p>
-    </div>
-  </div>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
 
-  <footer>
-    © 2025 AutoArchive – Wszystkie prawa zastrzeżone
-  </footer>
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const vin = document.getElementById('vinInput').value.trim().toUpperCase();
+      if (vin === "1HGCM82633A004352") window.location.href = "car1.html";
+      else if (vin === "1C4RJFBG0FC625797") window.location.href = "car2.html";
+      else if (vin === "WDBUF56X78B278934") window.location.href = "car3.html";
+      else alert("Nie znaleziono pojazdu.");
+    });
+  </script>
 
 </body>
 </html>
