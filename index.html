@@ -6,16 +6,11 @@
   <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #121212;
+      --bg-color: #0f0f0f;
       --text-color: #e0e0e0;
-      --card-bg: #1f1f1f;
+      --card-bg: #1e1e1e;
       --accent-color: #2196f3;
-    }
-
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #111111;
-      --card-bg: #f3f3f3;
+      --footer-bg: #111;
     }
 
     body {
@@ -23,40 +18,42 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
     }
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background-color: var(--bg-color);
-      padding: 15px 30px;
+      align-items: center;
+      padding: 20px 30px;
       flex-wrap: wrap;
     }
 
     .logo {
-      height: 120px;
+      height: 130px;
     }
 
     .nav-right {
       display: flex;
-      align-items: center;
-      gap: 30px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
     }
 
     nav a {
       color: var(--accent-color);
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem;
     }
 
     .settings {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
+      gap: 6px;
     }
 
     .theme-btn, select {
@@ -66,35 +63,34 @@
       padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
     }
 
     .container {
-      max-width: 800px;
-      margin: 40px auto;
+      max-width: 900px;
+      margin: 30px auto;
       padding: 0 20px;
     }
 
     .search-bar {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     #vinInput {
       flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 4px 0 0 4px;
+      padding: 12px;
       font-size: 1rem;
+      border: none;
+      border-radius: 6px 0 0 6px;
     }
 
     #searchBtn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       background-color: var(--accent-color);
       color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
       font-weight: bold;
+      border: none;
+      border-radius: 0 6px 6px 0;
       cursor: pointer;
     }
 
@@ -103,8 +99,6 @@
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-      cursor: pointer;
     }
 
     .car img {
@@ -117,17 +111,39 @@
       font-weight: bold;
       color: #bbb;
     }
+
+    .counter-section {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 2rem;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: var(--footer-bg);
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    footer a {
+      color: var(--accent-color);
+      margin: 0 10px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
+    <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="Logo" class="logo" /></a>
     <div class="nav-right">
-      <nav>
+      <div class="nav-links">
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
-      </nav>
+      </div>
       <div class="settings">
         <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
         <select id="langSelect">
@@ -142,56 +158,25 @@
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN lub model..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację...">
       <button id="searchBtn">Szukaj</button>
     </div>
+
+    <div class="counter-section">
+      Sprawdzonych aut: <span id="carCounter">0</span>
+    </div>
+
     <div id="carList"></div>
   </div>
 
-  <!-- SEKCJA 1: KORZYŚCI -->
-  <section style="padding: 40px 20px; background-color: #1a1a1a; color: white;">
-    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-      <div style="flex: 1; min-width: 220px; background: #2196f3; padding: 30px; border-radius: 10px; text-align: center;">
-        <h2 style="margin-bottom: 10px;">🧠 Inteligentna Analiza</h2>
-        <p>Przetwarzamy dane z Copart, IAA i innych źródeł. Otrzymujesz szczegółową historię pojazdu.</p>
-      </div>
-      <div style="flex: 1; min-width: 220px; background: #4caf50; padding: 30px; border-radius: 10px; text-align: center;">
-        <h2 style="margin-bottom: 10px;">📸 Pełna Galeria</h2>
-        <p>Zobacz realne zdjęcia pojazdu z aukcji – przed zakupem, nie po!</p>
-      </div>
-      <div style="flex: 1; min-width: 220px; background: #ff9800; padding: 30px; border-radius: 10px; text-align: center;">
-        <h2 style="margin-bottom: 10px;">💸 Tania Usługa</h2>
-        <p>Jednorazowa opłata 149 zł. Bez subskrypcji, bez haczyków.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEKCJA 2: JAK TO DZIAŁA -->
-  <section style="padding: 60px 20px; background-color: #111; color: white; text-align: center;">
-    <h2 style="font-size: 32px; margin-bottom: 30px;">Jak to działa?</h2>
-    <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
-      <div style="max-width: 240px;">
-        <div style="font-size: 48px; margin-bottom: 10px;">🔍</div>
-        <h3>Krok 1</h3>
-        <p>Wyszukaj pojazd po VIN lub modelu.</p>
-      </div>
-      <div style="max-width: 240px;">
-        <div style="font-size: 48px; margin-bottom: 10px;">📄</div>
-        <h3>Krok 2</h3>
-        <p>Sprawdź pełną historię i zdjęcia.</p>
-      </div>
-      <div style="max-width: 240px;">
-        <div style="font-size: 48px; margin-bottom: 10px;">💳</div>
-        <h3>Krok 3</h3>
-        <p>Usuń historię z internetu jednym kliknięciem.</p>
-      </div>
-    </div>
-  </section>
+  <footer>
+    &copy; 2025 AutoArchive • <a href="#">O nas</a> • <a href="#">Kontakt</a> • <a href="#">Regulamin</a>
+  </footer>
 
   <script>
     const cars = [
       {
-        vin: "WBA5B3C59ED530106",
+        vin: "WBAKN9C53ED393811",
         model: "BMW 530xi 2014",
         img: "car1.jpg",
         link: "car1.html"
@@ -202,31 +187,40 @@
         img: "car2.jpg",
         link: "car2.html"
       },
-      {
-        vin: "WDBUF56X78B278934",
-        model: "Mercedes E350 2008",
-        img: "car3.jpg",
-        link: "car3.html"
-      },
     ];
 
-    const carList = document.getElementById("carList");
-
     function renderCars(filter = "") {
-      carList.innerHTML = "";
+      const container = document.getElementById("carList");
+      container.innerHTML = "";
       cars
-        .filter(car => car.vin.includes(filter.toUpperCase()) || car.model.toLowerCase().includes(filter.toLowerCase()))
+        .filter(car => (
+          car.vin.includes(filter.toUpperCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase())
+        ))
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
-          el.onclick = () => window.location.href = car.link;
           el.innerHTML = `
-            <div class="vin">VIN: ${car.vin}</div>
-            <div>${car.model}</div>
-            <img src="${car.img}" alt="Zdjęcie auta" />
+            <a href="${car.link}" style="text-decoration:none; color:inherit;">
+              <div class="vin">VIN: ${car.vin}</div>
+              <div>${car.model}</div>
+              <img src="${car.img}" alt="Zdjęcie auta">
+            </a>
           `;
-          carList.appendChild(el);
+          container.appendChild(el);
         });
+    }
+
+    function animateCounter() {
+      const target = 24127;
+      let current = 0;
+      const el = document.getElementById("carCounter");
+      const step = () => {
+        current += Math.ceil((target - current) / 10);
+        el.textContent = current.toLocaleString();
+        if (current < target) requestAnimationFrame(step);
+      };
+      step();
     }
 
     function toggleTheme() {
@@ -234,11 +228,12 @@
     }
 
     document.getElementById("searchBtn").addEventListener("click", () => {
-      const value = document.getElementById("vinInput").value;
-      renderCars(value);
+      const input = document.getElementById("vinInput").value;
+      renderCars(input);
     });
 
-    renderCars(); // domyślnie pokaż wszystkie
+    renderCars();
+    animateCounter();
   </script>
 
 </body>
