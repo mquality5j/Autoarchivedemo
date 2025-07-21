@@ -2,134 +2,151 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>AutoArchive – Szczegóły pojazdu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoArchive – BMW 530xi</title>
   <style>
     body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
       color: #e0e0e0;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      background-color: #1f1f1f;
     }
 
     .container {
-      padding: 30px;
       max-width: 900px;
-      margin: auto;
-    }
-
-    .section {
-      background-color: #1f1f1f;
-      border-radius: 10px;
+      margin: 30px auto;
       padding: 20px;
-      margin-bottom: 20px;
     }
 
-    .section h2 {
-      margin-top: 0;
+    h1 {
       color: #2196f3;
     }
 
-    .car-img {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 10px;
-      margin: 15px 0;
+    .gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 30px;
     }
 
-    .button {
+    .gallery img {
+      width: 300px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    .info-box {
+      background-color: #1f1f1f;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .info-box strong {
+      color: #90caf9;
+    }
+
+    .delete-btn {
       background-color: #f44336;
-      border: none;
       color: white;
-      padding: 12px 24px;
-      font-size: 16px;
+      padding: 12px 20px;
+      font-weight: bold;
+      border: none;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
-    }
-
-    #paymentPanel {
-      display: none;
       margin-top: 20px;
     }
 
-    .payment-methods {
+    .payment-panel {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #1f1f1f;
+    }
+
+    .payment-panel h3 {
+      margin-bottom: 20px;
+    }
+
+    .payment-options {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .payment-option {
-      background-color: #2a2a2a;
+      flex: 1 1 150px;
       padding: 15px;
-      border-radius: 6px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: transform 0.2s ease;
     }
 
     .payment-option:hover {
-      background-color: #333;
+      transform: scale(1.05);
+    }
+
+    .paypal { background-color: #0070ba; }
+    .blik { background-color: #000000; }
+    .przelewy { background-color: #d32f2f; }
+
+    .payment-option img {
+      display: block;
+      margin: 0 auto 10px;
+      height: 30px;
     }
   </style>
 </head>
 <body>
-
-  <header>AutoArchive – BMW 530xi</header>
-
   <div class="container">
+    <h1>BMW 530xi – Szczegóły Aukcji</h1>
 
-    <div class="section">
-      <h2>Dane techniczne</h2>
-      <p><strong>Marka:</strong> BMW</p>
-      <p><strong>Model:</strong> 530xi</p>
-      <p><strong>Rok:</strong> 2007</p>
-      <p><strong>Napęd:</strong> AWD</p>
-      <p><strong>Paliwo:</strong> Benzyna</p>
+    <div class="gallery">
+      <img src="car1-1.jpg" alt="BMW 530xi 1" />
+      <img src="car1-2.jpg" alt="BMW 530xi 2" />
+      <img src="car1-3.jpg" alt="BMW 530xi 3" />
     </div>
 
-    <div class="section">
-      <h2>Informacje z aukcji</h2>
-      <p><strong>Numer VIN:</strong> WBANF73567CU21346</p>
+    <div class="info-box">
+      <p><strong>VIN:</strong> WBAFU7C5XBDU65432</p>
+      <p><strong>Lokalizacja:</strong> New York, NY</p>
       <p><strong>Tytuł:</strong> Salvage</p>
-      <p><strong>Uszkodzenia:</strong> Front End</p>
-      <p><strong>Lokalizacja:</strong> Illinois, Chicago</p>
-      <a href="https://www.copart.com/lot/39381134" target="_blank" style="color:#2196f3;">Zobacz aukcję</a>
+      <p><strong>Uszkodzenia:</strong> Przód, zawieszenie</p>
+      <p><strong>Cena końcowa:</strong> $6,700</p>
+      <p><strong>Link do aukcji:</strong> <a href="https://www.copart.com/lot/39381134" target="_blank" style="color:#90caf9;">Otwórz aukcję</a></p>
     </div>
 
-    <div class="section">
-      <h2>Zdjęcie pojazdu</h2>
-      <img src="IMG_1462.jpeg" alt="BMW 530xi" class="car-img" />
-    </div>
+    <button class="delete-btn" onclick="showPayment()">Usuń historię</button>
 
-    <div class="section">
-      <h2>Usuń historię</h2>
-      <button class="button" onclick="showPayment()">Usuń historię</button>
-      <div id="paymentPanel">
-        <h3>Wybierz metodę płatności:</h3>
-        <div class="payment-methods">
-          <div class="payment-option">💳 Karta płatnicza</div>
-          <div class="payment-option">💸 Przelew bankowy</div>
-          <div class="payment-option">🅿️ PayPal</div>
+    <div class="payment-panel" id="paymentPanel">
+      <h3>Wybierz metodę płatności:</h3>
+      <div class="payment-options">
+        <div class="payment-option paypal">
+          <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" />
+          PayPal
+        </div>
+        <div class="payment-option przelewy">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Przelewy24_logo.png" alt="Przelewy24" />
+          Przelewy24
+        </div>
+        <div class="payment-option blik">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Blik_logo.png" alt="Blik" />
+          BLIK
         </div>
       </div>
     </div>
-
   </div>
 
   <script>
     function showPayment() {
       document.getElementById("paymentPanel").style.display = "block";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
   </script>
-
 </body>
 </html>
