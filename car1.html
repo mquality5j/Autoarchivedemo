@@ -2,176 +2,133 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Szczegóły pojazdu - AutoArchive</title>
+  <title>AutoArchive – Szczegóły pojazdu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
       color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-      flex-wrap: wrap;
-      background-color: #121212;
-    }
-
-    .logo {
-      height: 120px;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-
-    nav a {
-      color: #2196f3;
-      text-decoration: none;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
       font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .settings {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .theme-btn, select {
       background-color: #1f1f1f;
-      color: #e0e0e0;
-      border: 1px solid #2196f3;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    .info-block {
+    .section {
       background-color: #1f1f1f;
-      padding: 20px;
       border-radius: 10px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
-    .info-block h2 {
+    .section h2 {
       margin-top: 0;
       color: #2196f3;
     }
 
-    .gallery {
+    .car-img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .button {
+      background-color: #f44336;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #paymentPanel {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .payment-methods {
       display: flex;
-      overflow-x: auto;
+      flex-direction: column;
       gap: 10px;
     }
 
-    .gallery img {
-      max-height: 200px;
+    .payment-option {
+      background-color: #2a2a2a;
+      padding: 15px;
       border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .payment-option:hover {
+      background-color: #333;
     }
   </style>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 </head>
 <body>
 
-  <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    <div class="nav-right">
-      <nav>
-        <a href="#">O nas</a>
-        <a href="#">Kontakt</a>
-      </nav>
-      <div class="settings">
-        <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
-        <select id="langSelect">
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-        </select>
-      </div>
-    </div>
-  </header>
+  <header>AutoArchive – BMW 530xi</header>
 
   <div class="container">
 
-    <div class="info-block">
+    <div class="section">
       <h2>Dane techniczne</h2>
-      <p>Marka: BMW</p>
-      <p>Model: 530xi</p>
-      <p>Rok produkcji: 2007</p>
-      <p>Silnik: 3.0L I6</p>
-      <p>VIN: WBANN73597CN02628</p>
+      <p><strong>Marka:</strong> BMW</p>
+      <p><strong>Model:</strong> 530xi</p>
+      <p><strong>Rok:</strong> 2007</p>
+      <p><strong>Napęd:</strong> AWD</p>
+      <p><strong>Paliwo:</strong> Benzyna</p>
     </div>
 
-    <div class="info-block">
-      <h2>Informacje aukcyjne</h2>
-      <p>Lokalizacja: PA - Philadelphia</p>
-      <p>Tytuł: Salvage</p>
-      <p>Uszkodzenia: Front End</p>
-      <p>Cena wywoławcza: $1,000</p>
-      <p><a href="https://www.copart.com/lot/39381134" target="_blank" style="color: #4fc3f7;">Zobacz aukcję</a></p>
+    <div class="section">
+      <h2>Informacje z aukcji</h2>
+      <p><strong>Numer VIN:</strong> WBANF73567CU21346</p>
+      <p><strong>Tytuł:</strong> Salvage</p>
+      <p><strong>Uszkodzenia:</strong> Front End</p>
+      <p><strong>Lokalizacja:</strong> Illinois, Chicago</p>
+      <a href="https://www.copart.com/lot/39381134" target="_blank" style="color:#2196f3;">Zobacz aukcję</a>
     </div>
 
-    <div class="info-block">
-      <h2>Galeria zdjęć</h2>
-      <div class="gallery">
-        <img src="IMG_1462.jpeg" alt="BMW 530xi front">
-        <img src="IMG_1462.jpeg" alt="BMW 530xi side">
-        <img src="IMG_1462.jpeg" alt="BMW 530xi rear">
+    <div class="section">
+      <h2>Zdjęcie pojazdu</h2>
+      <img src="IMG_1462.jpeg" alt="BMW 530xi" class="car-img" />
+    </div>
+
+    <div class="section">
+      <h2>Usuń historię</h2>
+      <button class="button" onclick="showPayment()">Usuń historię</button>
+      <div id="paymentPanel">
+        <h3>Wybierz metodę płatności:</h3>
+        <div class="payment-methods">
+          <div class="payment-option">💳 Karta płatnicza</div>
+          <div class="payment-option">💸 Przelew bankowy</div>
+          <div class="payment-option">🅿️ PayPal</div>
+        </div>
       </div>
-    </div>
-
-    <div class="info-block">
-      <h2>Usuń historię pojazdu</h2>
-      <p>Po dokonaniu płatności ogłoszenie zostanie trwale usunięte z publicznego widoku.</p>
-      <div id="paypal-button-container"></div>
     </div>
 
   </div>
 
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle("light-mode");
+    function showPayment() {
+      document.getElementById("paymentPanel").style.display = "block";
     }
-
-    paypal.Buttons({
-      style: {
-        shape: 'pill',
-        color: 'blue',
-        layout: 'vertical',
-        label: 'pay',
-      },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: '5.00'
-            }
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Dziękujemy za płatność, ' + details.payer.name.given_name + '!');
-        });
-      }
-    }).render('#paypal-button-container');
   </script>
 
 </body>
