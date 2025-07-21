@@ -6,9 +6,9 @@
   <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #000000;
+      --bg-color: #121212;
       --text-color: #e0e0e0;
-      --card-bg: #1c1c1c;
+      --card-bg: #1f1f1f;
       --accent-color: #2196f3;
     }
 
@@ -37,11 +37,12 @@
 
     .logo {
       height: 120px;
+      cursor: pointer;
     }
 
     .nav-right {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       gap: 30px;
     }
 
@@ -50,9 +51,6 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-      background-color: var(--card-bg);
-      padding: 8px 12px;
-      border-radius: 6px;
     }
 
     .settings {
@@ -73,7 +71,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 800px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -125,7 +123,7 @@
 <body>
 
   <header>
-    <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" /></a>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" onclick="location.href='index.html'" />
     <div class="nav-right">
       <nav>
         <a href="#">O nas</a>
@@ -152,19 +150,52 @@
   </div>
 
   <script>
+    const translations = {
+      pl: {
+        search: "Szukaj",
+        inputPlaceholder: "Wpisz VIN...",
+        about: "O nas",
+        contact: "Kontakt"
+      },
+      en: {
+        search: "Search",
+        inputPlaceholder: "Enter VIN...",
+        about: "About",
+        contact: "Contact"
+      },
+      de: {
+        search: "Suchen",
+        inputPlaceholder: "VIN eingeben...",
+        about: "Über uns",
+        contact: "Kontakt"
+      },
+      ru: {
+        search: "Поиск",
+        inputPlaceholder: "Введите VIN...",
+        about: "О нас",
+        contact: "Контакт"
+      }
+    };
+
     const cars = [
       {
         vin: "1HGCM82633A004352",
-        model: "BMW 530xi 2007",
-        img: "IMG_1462.jpeg",
-        page: "car1.html"
+        model: "Honda Accord 2003",
+        img: "car1.jpg",
+        link: "car1.html"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
         img: "car2.jpg",
-        page: "car2.html"
-      }
+        link: "car2.html"
+      },
+      {
+        vin: "WDBUF56X78B278934",
+        model: "Mercedes E350 2008",
+        img: "car3.jpg",
+        link: "car3.html"
+      },
     ];
 
     const carList = document.getElementById("carList");
@@ -172,10 +203,7 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car =>
-          car.vin.includes(filter.toUpperCase()) ||
-          car.model.toLowerCase().includes(filter.toLowerCase())
-        )
+        .filter(car => car.vin.includes(filter.toUpperCase()))
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
@@ -184,7 +212,9 @@
             <div>${car.model}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
-          el.onclick = () => window.location.href = car.page;
+          el.addEventListener("click", () => {
+            location.href = car.link;
+          });
           carList.appendChild(el);
         });
     }
@@ -196,6 +226,14 @@
     document.getElementById("searchBtn").addEventListener("click", () => {
       const value = document.getElementById("vinInput").value;
       renderCars(value);
+    });
+
+    document.getElementById("langSelect").addEventListener("change", (e) => {
+      const lang = e.target.value;
+      document.getElementById("searchBtn").textContent = translations[lang].search;
+      document.getElementById("vinInput").placeholder = translations[lang].inputPlaceholder;
+      document.querySelectorAll("nav a")[0].textContent = translations[lang].about;
+      document.querySelectorAll("nav a")[1].textContent = translations[lang].contact;
     });
 
     renderCars(); // domyślnie pokaż wszystkie
