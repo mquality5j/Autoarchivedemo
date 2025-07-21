@@ -37,11 +37,12 @@
 
     .logo {
       height: 120px;
+      cursor: pointer;
     }
 
     .nav-right {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 30px;
     }
 
@@ -122,7 +123,7 @@
 <body>
 
   <header>
-    <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" /></a>
+    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" onclick="goHome()" />
     <div class="nav-right">
       <nav>
         <a href="#">O nas</a>
@@ -142,7 +143,7 @@
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację..."/>
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
@@ -151,8 +152,8 @@
   <script>
     const cars = [
       {
-        vin: "1HGCM82633A004352",
-        model: "Honda Accord 2003",
+        vin: "WBAFU7C5XBDU65432",
+        model: "BMW 530xi 2013",
         img: "car1.jpg",
         link: "car1.html"
       },
@@ -167,7 +168,7 @@
         model: "Mercedes E350 2008",
         img: "car3.jpg",
         link: "car3.html"
-      }
+      },
     ];
 
     const carList = document.getElementById("carList");
@@ -175,7 +176,10 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car => car.vin.toUpperCase().includes(filter.toUpperCase()))
+        .filter(car =>
+          car.vin.includes(filter.toUpperCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase())
+        )
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
@@ -193,12 +197,16 @@
       document.body.classList.toggle("light-mode");
     }
 
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
     document.getElementById("searchBtn").addEventListener("click", () => {
       const value = document.getElementById("vinInput").value;
       renderCars(value);
     });
 
-    renderCars(); // Pokaż wszystkie samochody na start
+    renderCars(); // domyślnie pokaż wszystkie
   </script>
 
 </body>
