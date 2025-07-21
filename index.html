@@ -6,9 +6,9 @@
   <title>AutoArchive</title>
   <style>
     :root {
-      --bg-color: #000000;
+      --bg-color: #000;
       --text-color: #e0e0e0;
-      --card-bg: #1c1c1c;
+      --card-bg: #1a1a1a;
       --accent-color: #2196f3;
     }
 
@@ -28,21 +28,21 @@
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: flex-start;
       background-color: var(--bg-color);
       padding: 15px 30px;
       flex-wrap: wrap;
     }
 
     .logo {
-      height: 150px;
+      height: 130px;
     }
 
-    .nav-right {
+    .nav-section {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 20px;
     }
 
     nav a {
@@ -50,6 +50,10 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
+      background-color: transparent;
+      border: 1px solid var(--accent-color);
+      border-radius: 5px;
+      padding: 6px 10px;
     }
 
     .settings {
@@ -57,9 +61,11 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 8px;
+      margin-left: 30px;
     }
 
-    .theme-btn, select {
+    .theme-btn,
+    select {
       background-color: var(--card-bg);
       color: var(--text-color);
       border: 1px solid var(--accent-color);
@@ -70,7 +76,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -123,7 +129,7 @@
 
   <header>
     <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" /></a>
-    <div class="nav-right">
+    <div class="nav-section">
       <nav>
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
@@ -142,7 +148,7 @@
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację..."/>
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
@@ -151,20 +157,21 @@
   <script>
     const cars = [
       {
-        vin: "1HGCM82633A004352",
-        model: "Honda Accord 2003",
-        img: "car1.jpg"
+        vin: "WBAKB9C58ED393811",
+        model: "BMW 530xi 2014",
+        title: "Salvage",
+        location: "CA - Los Angeles",
+        img: "IMG_1462.jpeg",
+        link: "car1.html"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
-        img: "car2.jpg"
-      },
-      {
-        vin: "WDBUF56X78B278934",
-        model: "Mercedes E350 2008",
-        img: "car3.jpg"
-      },
+        title: "Clean",
+        location: "TX - Dallas",
+        img: "car2.jpg",
+        link: "car2.html"
+      }
     ];
 
     const carList = document.getElementById("carList");
@@ -172,18 +179,21 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car => car.vin.includes(filter.toUpperCase()))
-        .forEach((car, index) => {
+        .filter(car =>
+          car.vin.toLowerCase().includes(filter.toLowerCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase()) ||
+          car.location.toLowerCase().includes(filter.toLowerCase()) ||
+          car.title.toLowerCase().includes(filter.toLowerCase())
+        )
+        .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
+          el.onclick = () => window.location.href = car.link;
           el.innerHTML = `
             <div class="vin">VIN: ${car.vin}</div>
             <div>${car.model}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
-          el.addEventListener("click", () => {
-            window.location.href = \`car${index + 1}.html\`;
-          });
           carList.appendChild(el);
         });
     }
@@ -197,7 +207,7 @@
       renderCars(value);
     });
 
-    renderCars(); // domyślnie pokaż wszystkie
+    renderCars();
   </script>
 
 </body>
