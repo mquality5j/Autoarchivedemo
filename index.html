@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoArchive</title>
+  <title>AutoArchive – Historia Pojazdów</title>
   <style>
     :root {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --card-bg: #1f1f1f;
+      --bg-color: #0f1115;
+      --text-color: #ffffff;
       --accent-color: #2196f3;
-    }
-
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #111111;
-      --card-bg: #f3f3f3;
+      --secondary-accent: #ff1744;
+      --card-bg: #1a1d23;
+      --header-bg: #0c0e12;
     }
 
     body {
@@ -23,31 +19,25 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
     }
 
     header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       padding: 15px 30px;
-      background-color: var(--bg-color);
+      background-color: var(--header-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
       flex-wrap: wrap;
     }
 
     .logo {
-      height: 140px;
+      height: 120px;
     }
 
-    .nav-right {
+    .header-right {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .nav-buttons {
-      display: flex;
+      align-items: center;
       gap: 30px;
     }
 
@@ -55,89 +45,123 @@
       color: var(--accent-color);
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem;
+      margin: 0 10px;
     }
 
     .settings {
       display: flex;
       flex-direction: column;
-      gap: 6px;
       align-items: flex-end;
+      gap: 6px;
     }
 
     .theme-btn, select {
+      padding: 6px 12px;
       background-color: var(--card-bg);
       color: var(--text-color);
       border: 1px solid var(--accent-color);
-      padding: 6px 12px;
       border-radius: 6px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .counter {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--secondary-accent);
+      margin-top: 30px;
     }
 
     .search-bar {
       display: flex;
-      margin-bottom: 20px;
+      justify-content: center;
+      margin-top: 30px;
+      padding: 0 20px;
     }
 
     #vinInput {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 4px 0 0 4px;
+      padding: 12px;
       font-size: 1rem;
+      border: none;
+      border-radius: 6px 0 0 6px;
+      width: 300px;
     }
 
     #searchBtn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       background-color: var(--accent-color);
       color: white;
       border: none;
-      border-radius: 0 4px 4px 0;
+      border-radius: 0 6px 6px 0;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .car {
-      background-color: var(--card-bg);
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-      cursor: pointer;
+    .container {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    .car img {
+    .car-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .car-card img {
       max-width: 100%;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-top: 10px;
     }
 
-    .vin {
+    footer {
+      background-color: #090b0f;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    .car-title {
+      font-size: 1.3rem;
       font-weight: bold;
-      color: #bbb;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    </a>
-    <div class="nav-right">
-      <div class="nav-buttons">
-        <nav>
-          <a href="#">O nas</a>
-          <a href="#">Kontakt</a>
-        </nav>
-      </div>
+    <a href="index.html"><img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo"></a>
+    <div class="header-right">
+      <nav>
+        <a href="#">O nas</a>
+        <a href="#">Kontakt</a>
+      </nav>
       <div class="settings">
         <button class="theme-btn" onclick="toggleTheme()">🌙 Tryb</button>
         <select id="langSelect">
@@ -150,34 +174,39 @@
     </div>
   </header>
 
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację..."/>
-      <button id="searchBtn">Szukaj</button>
-    </div>
-    <div id="carList"></div>
+  <section class="hero">
+    <h1>AutoArchive</h1>
+    <p>Sprawdź historię pojazdu przed zakupem. Przejrzysta, dokładna i dostępna od ręki.</p>
+    <div class="counter">Sprawdzonych pojazdów: <span id="carCount">3147</span></div>
+  </section>
+
+  <div class="search-bar">
+    <input type="text" id="vinInput" placeholder="Wpisz VIN...">
+    <button id="searchBtn">Szukaj</button>
   </div>
+
+  <div class="container" id="carList">
+    <!-- Auta zostaną wczytane przez JS -->
+  </div>
+
+  <footer>
+    &copy; 2025 AutoArchive. Wszystkie prawa zastrzeżone.
+  </footer>
 
   <script>
     const cars = [
       {
-        vin: "WBA5A7C52ED617812",
-        model: "BMW 530xi 2014",
+        vin: "WBAXH5C55CDW23195",
+        model: "BMW 530xi 2012",
         img: "IMG_1462.jpeg",
-        page: "car1.html"
+        link: "car1.html"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
         img: "car2.jpg",
-        page: "car2.html"
-      },
-      {
-        vin: "WDBUF56X78B278934",
-        model: "Mercedes E350 2008",
-        img: "car3.jpg",
-        page: "#"
-      },
+        link: "car2.html"
+      }
     ];
 
     const carList = document.getElementById("carList");
@@ -185,33 +214,31 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car =>
-          car.vin.toLowerCase().includes(filter.toLowerCase()) ||
-          car.model.toLowerCase().includes(filter.toLowerCase())
-        )
+        .filter(car => car.vin.includes(filter.toUpperCase()) || car.model.toLowerCase().includes(filter.toLowerCase()))
         .forEach(car => {
           const el = document.createElement("div");
-          el.className = "car";
-          el.onclick = () => window.location.href = car.page;
+          el.className = "car-card";
           el.innerHTML = `
-            <div class="vin">VIN: ${car.vin}</div>
-            <div>${car.model}</div>
-            <img src="${car.img}" alt="Zdjęcie auta" />
+            <div class="car-title">${car.model}</div>
+            <div>VIN: ${car.vin}</div>
+            <a href="${car.link}">
+              <img src="${car.img}" alt="Zdjęcie auta" />
+            </a>
           `;
           carList.appendChild(el);
         });
     }
 
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const query = document.getElementById("vinInput").value;
+      renderCars(query);
+    });
+
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
     }
 
-    document.getElementById("searchBtn").addEventListener("click", () => {
-      const value = document.getElementById("vinInput").value;
-      renderCars(value);
-    });
-
-    renderCars(); // domyślnie pokaż wszystkie
+    renderCars();
   </script>
 
 </body>
