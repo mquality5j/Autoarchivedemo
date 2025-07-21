@@ -42,7 +42,7 @@
 
     .nav-right {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       gap: 30px;
     }
 
@@ -71,7 +71,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -118,6 +118,26 @@
       font-weight: bold;
       color: #bbb;
     }
+
+    .hero {
+      background-color: #1a1a1a;
+      padding: 50px 20px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -141,9 +161,14 @@
     </div>
   </header>
 
+  <section class="hero">
+    <h1>Sprawdź historię pojazdu</h1>
+    <p>AutoArchive to szybki dostęp do danych z aukcji samochodowych. Przejrzystość, bezpieczeństwo, pewność.</p>
+  </section>
+
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="vinInput" placeholder="Wpisz VIN, model, lokalizację..."/>
+      <input type="text" id="vinInput" placeholder="Wpisz VIN lub model..."/>
       <button id="searchBtn">Szukaj</button>
     </div>
     <div id="carList"></div>
@@ -152,23 +177,23 @@
   <script>
     const cars = [
       {
-        vin: "WBAFU7C5XBDU65432",
-        model: "BMW 530xi 2013",
+        vin: "WBAKN9C57ED395200",
+        model: "BMW 530xi 2014",
         img: "car1.jpg",
-        link: "car1.html"
+        page: "car1.html"
       },
       {
         vin: "1C4RJFBG0FC625797",
         model: "Jeep Grand Cherokee 2015",
         img: "car2.jpg",
-        link: "car2.html"
+        page: "car2.html"
       },
       {
         vin: "WDBUF56X78B278934",
         model: "Mercedes E350 2008",
         img: "car3.jpg",
-        link: "car3.html"
-      },
+        page: "car3.html"
+      }
     ];
 
     const carList = document.getElementById("carList");
@@ -176,19 +201,18 @@
     function renderCars(filter = "") {
       carList.innerHTML = "";
       cars
-        .filter(car =>
-          car.vin.includes(filter.toUpperCase()) ||
-          car.model.toLowerCase().includes(filter.toLowerCase())
-        )
+        .filter(car => car.vin.includes(filter.toUpperCase()) || car.model.toLowerCase().includes(filter.toLowerCase()))
         .forEach(car => {
           const el = document.createElement("div");
           el.className = "car";
-          el.onclick = () => window.location.href = car.link;
           el.innerHTML = `
             <div class="vin">VIN: ${car.vin}</div>
             <div>${car.model}</div>
             <img src="${car.img}" alt="Zdjęcie auta" />
           `;
+          el.onclick = () => {
+            window.location.href = car.page;
+          };
           carList.appendChild(el);
         });
     }
