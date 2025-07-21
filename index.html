@@ -30,7 +30,7 @@
     }
 
     .logo {
-      height: 60px;
+      height: 90px;
     }
 
     .nav-right {
@@ -142,6 +142,18 @@
       color: white;
       font-size: 18px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        background-color: var(--card-bg);
+      }
+      50% {
+        transform: scale(1.02);
+        background-color: #2b2b2b;
+      }
     }
   </style>
 </head>
