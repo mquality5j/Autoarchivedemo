@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoArchive – Historia Pojazdów</title>
+  <title>AutoArchive PRO</title>
   <style>
     :root {
-      --bg-color: #0b0f1a;
-      --text-color: #ffffff;
-      --card-bg: linear-gradient(145deg, #1e2a47, #131c33);
-      --accent-color: #3f9cff;
-      --accent-red: #ff4b4b;
+      --bg-color: #0f0f0f;
+      --text-color: #f0f0f0;
+      --accent-blue: #1e90ff;
+      --accent-red: #ff4c4c;
+      --card-bg: #1a1a1a;
+      --border: #2a2a2a;
     }
 
     body {
@@ -21,49 +22,49 @@
     }
 
     header {
-      background-color: #0f1626;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      padding: 20px 30px;
+      background-color: var(--bg-color);
+      border-bottom: 1px solid var(--border);
     }
 
     .logo {
-      height: 110px;
+      height: 100px;
+    }
+
+    .nav-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
     nav a {
-      color: var(--accent-color);
+      color: var(--accent-blue);
       text-decoration: none;
-      margin: 0 15px;
       font-weight: bold;
-    }
-
-    nav a:hover {
-      color: var(--accent-red);
     }
 
     .settings {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      gap: 8px;
     }
 
     .theme-btn, select {
-      background-color: #1a2238;
-      color: white;
-      border: 1px solid var(--accent-color);
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-top: 10px;
+      padding: 6px 12px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--accent-blue);
+      border-radius: 5px;
       cursor: pointer;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 30px auto;
+      max-width: 1000px;
+      margin: 40px auto;
       padding: 0 20px;
     }
 
@@ -74,74 +75,68 @@
 
     #vinInput {
       flex: 1;
-      padding: 14px;
-      font-size: 1rem;
+      padding: 10px;
       border: none;
-      border-radius: 8px 0 0 8px;
+      border-radius: 6px 0 0 6px;
+      font-size: 1rem;
     }
 
     #searchBtn {
-      padding: 14px 30px;
-      background-color: var(--accent-color);
+      padding: 10px 25px;
+      background: var(--accent-blue);
       color: white;
-      font-weight: bold;
       border: none;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 6px 6px 0;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 15px;
+    .stats-box {
+      background-color: var(--card-bg);
       padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .card img {
-      width: 100%;
       border-radius: 10px;
-      margin-top: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--accent-red);
+      box-shadow: 0 0 10px rgba(255, 76, 76, 0.4);
     }
 
-    .card .vin {
-      font-weight: bold;
-      color: #aaaaaa;
+    .car {
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border: 1px solid var(--border);
     }
 
-    .counter {
-      background: linear-gradient(135deg, var(--accent-red), var(--accent-color));
-      padding: 12px 24px;
-      border-radius: 12px;
-      color: white;
-      font-size: 1.2rem;
+    .car img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    .vin {
       font-weight: bold;
-      display: inline-block;
-      margin: 20px 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      color: #bbb;
+      margin-bottom: 8px;
     }
 
     footer {
+      padding: 20px;
       text-align: center;
-      padding: 25px;
-      background-color: #0f1626;
-      color: #888888;
+      border-top: 1px solid var(--border);
       font-size: 0.9rem;
-      margin-top: 40px;
+      color: #999;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo">
-    <div>
+    <a href="index.html"><img src="logo.png" alt="AutoArchive" class="logo"></a>
+    <div class="nav-section">
       <nav>
         <a href="#">O nas</a>
         <a href="#">Kontakt</a>
@@ -164,22 +159,22 @@
       <button id="searchBtn">Szukaj</button>
     </div>
 
-    <div class="counter">Sprawdzono 6 932 148 pojazdów</div>
-
-    <div id="carList">
-      <!-- Wygenerowane samochody -->
+    <div class="stats-box">
+      Sprawdzonych pojazdów: <span id="carCount">0</span>
     </div>
+
+    <div id="carList"></div>
   </div>
 
   <footer>
-    &copy; 2025 AutoArchive. Profesjonalna historia pojazdów.
+    AutoArchive &copy; 2025. Wszelkie prawa zastrzeżone.
   </footer>
 
   <script>
     const cars = [
       {
-        vin: "WBANU73579C123456",
-        model: "BMW 530xi 2009",
+        vin: "WBA5A7C58FD627296",
+        model: "BMW 530xi 2015",
         img: "IMG_1462.jpeg",
         link: "car1.html"
       },
@@ -192,32 +187,40 @@
     ];
 
     const carList = document.getElementById("carList");
+    const carCount = document.getElementById("carCount");
 
     function renderCars(filter = "") {
       carList.innerHTML = "";
+      let count = 0;
       cars
-        .filter(car => car.vin.includes(filter.toUpperCase()) || car.model.toLowerCase().includes(filter.toLowerCase()))
+        .filter(car =>
+          car.vin.includes(filter.toUpperCase()) ||
+          car.model.toLowerCase().includes(filter.toLowerCase())
+        )
         .forEach(car => {
           const el = document.createElement("div");
-          el.className = "card";
-          el.onclick = () => location.href = car.link;
+          el.className = "car";
           el.innerHTML = `
-            <div class="vin">VIN: ${car.vin}</div>
-            <div>${car.model}</div>
-            <img src="${car.img}" alt="Zdjęcie auta">
+            <a href="${car.link}" style="text-decoration:none; color:inherit">
+              <div class="vin">VIN: ${car.vin}</div>
+              <div>${car.model}</div>
+              <img src="${car.img}" alt="${car.model}">
+            </a>
           `;
           carList.appendChild(el);
+          count++;
         });
+      carCount.textContent = count;
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
     }
 
     document.getElementById("searchBtn").addEventListener("click", () => {
       const value = document.getElementById("vinInput").value;
       renderCars(value);
     });
-
-    function toggleTheme() {
-      document.body.classList.toggle("light-mode");
-    }
 
     renderCars();
   </script>
