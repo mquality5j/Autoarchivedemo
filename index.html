@@ -2,264 +2,227 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoArchive UltraPro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoArchive</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --bg-color: #0a0a0a;
-      --text-color: #ffffff;
-      --card-bg: #1c1c1c;
-      --accent-blue: #007BFF;
-      --accent-red: #FF4136;
-      --accent-green: #28a745;
-      --accent-cyan: #00ccff;
-      --shadow: rgba(0, 0, 0, 0.4);
-    }
-
     body {
       margin: 0;
+      background: #111;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      animation: fadeIn 1s ease-in;
+      color: #fff;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     header {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 25px 50px;
-      background-color: var(--bg-color);
-      box-shadow: 0 2px 10px var(--shadow);
+      padding: 20px 40px;
+      background: transparent;
     }
-
     .logo {
-      height: 140px;
-      transition: transform 0.3s ease;
-      margin-left: -20px; /* przesunięcie logo w lewo */
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff;
+      animation: slideIn 1s ease-out;
     }
-
-    .logo:hover {
-      transform: scale(1.08);
+    @keyframes slideIn {
+      from {transform: translateX(-100px); opacity: 0;}
+      to {transform: translateX(0); opacity: 1;}
     }
-
-    .nav-right {
+    .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .menu a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .menu a:hover {
+      color: #fff;
+    }
+    .controls {
       display: flex;
       align-items: center;
-      gap: 30px;
-    }
-
-    .nav-right a {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-
-    .nav-right a:hover {
-      color: var(--accent-cyan);
-    }
-
-    .settings {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .theme-btn, select {
+      gap: 10px;
+      background: #222;
       padding: 6px 12px;
-      border-radius: 5px;
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--accent-blue);
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      border-radius: 6px;
     }
-
-    .theme-btn:hover, select:hover {
-      background-color: var(--accent-blue);
-    }
-
-    .main-title {
+    .hero {
       text-align: center;
-      font-size: 36px;
-      margin: 40px 0 20px;
-      font-weight: bold;
-      color: var(--accent-cyan); /* nowy kolor */
+      padding: 60px 20px 30px;
     }
-
+    .hero h1 {
+      font-size: 40px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
     .search-bar {
       display: flex;
       justify-content: center;
-      margin-bottom: 50px;
+      gap: 10px;
+      margin-bottom: 60px;
     }
-
-    #vinInput {
-      padding: 12px;
-      font-size: 18px;
-      width: 320px;
+    input[type="text"] {
+      padding: 12px 20px;
+      font-size: 16px;
       border: none;
-      border-radius: 4px 0 0 4px;
+      border-radius: 6px;
+      width: 300px;
+      background: #222;
+      color: #fff;
     }
-
-    #searchBtn {
-      padding: 12px 24px;
-      background-color: var(--accent-blue);
-      color: white;
+    button {
+      padding: 12px 20px;
+      background: #0d6efd;
+      color: #fff;
       border: none;
-      font-weight: bold;
-      border-radius: 0 4px 4px 0;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
-
-    #searchBtn:hover {
-      background-color: var(--accent-cyan);
-      color: black;
+    button:hover {
+      background: #0b5ed7;
     }
-
-    .gallery {
+    .car-grid {
       display: flex;
       justify-content: center;
       gap: 40px;
-      flex-wrap: nowrap;
-      margin: 0 auto 60px;
-      max-width: 1100px;
-    }
-
-    .car-tile {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      width: 320px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 12px var(--shadow);
-    }
-
-    .car-tile:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 20px var(--accent-blue);
-    }
-
-    .car-tile img {
-      width: 100%;
-      display: block;
-    }
-
-    .car-tile p {
-      margin: 12px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .bottom-panels {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 70px auto;
       flex-wrap: wrap;
+      padding: 0 20px;
     }
-
-    .panel {
-      background-color: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 12px;
+    .car-card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 300px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+    .car-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+    }
+    .car-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .car-card .info {
+      padding: 15px;
       text-align: center;
-      width: 320px;
       font-weight: bold;
-      font-size: 20px;
-      color: white;
-      animation: pulseGlow 4s infinite ease-in-out;
-      box-shadow: 0 0 14px var(--shadow);
     }
-
-    .panel i {
-      font-size: 34px;
-      margin-bottom: 14px;
-      display: block;
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 60px 20px;
     }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 12px rgba(255,255,255,0.1);
-      }
-      50% {
-        transform: scale(1.03);
-        box-shadow: 0 0 25px rgba(255,255,255,0.3);
-      }
+    .feature-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      color: #fff;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
-
-    .blue { color: var(--accent-blue); }
-    .red { color: var(--accent-red); }
-    .green { color: var(--accent-green); }
+    .feature-box:hover {
+      background: #1d1d1d;
+      transform: translateY(-5px);
+    }
+    .feature-box i {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #ff4757;
+    }
+    .counter {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0f0;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 14px;
+      color: #666;
+    }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
   <header>
-    <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
-    <div class="nav-right">
+    <div class="logo">AutoArchive</div>
+    <div class="menu">
       <a href="#">O nas</a>
       <a href="#">Kontakt</a>
-      <div class="settings">
-        <button class="theme-btn">🌙 Tryb</button>
+      <div class="controls">
         <select>
           <option>PL</option>
           <option>EN</option>
           <option>DE</option>
-          <option>RU</option>
         </select>
+        <button onclick="toggleTheme()">🌓</button>
       </div>
     </div>
   </header>
 
-  <h1 class="main-title">Wyszukaj samochód</h1>
-
-  <div class="search-bar">
-    <input type="text" id="vinInput" placeholder="Wpisz VIN..." />
-    <button id="searchBtn">Szukaj</button>
-  </div>
-
-  <div class="gallery">
-    <div class="car-tile" onclick="location.href='car1.html'">
-      <img src="car1.jpg" alt="BMW 530xi">
-      <p>BMW 530xi 2007</p>
-    </div>
-    <div class="car-tile" onclick="location.href='car2.html'">
-      <img src="car2.jpg" alt="Audi A6">
-      <p>Audi A6 2015</p>
-    </div>
-    <div class="car-tile" onclick="location.href='car3.html'">
-      <img src="car3.jpg" alt="Mercedes E350">
-      <p>Mercedes E350 2010</p>
+  <div class="hero">
+    <h1>Wyszukaj samochód</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Wprowadź VIN">
+      <button>Szukaj</button>
     </div>
   </div>
 
-  <div class="bottom-panels">
-    <div class="panel blue">
+  <div class="car-grid">
+    <div class="car-card" onclick="location.href='car1.html'">
+      <img src="car1.jpg" alt="BMW 530xi" />
+      <div class="info">BMW 530xi 2017</div>
+    </div>
+    <div class="car-card" onclick="location.href='car2.html'">
+      <img src="car2.jpg" alt="Audi A6" />
+      <div class="info">Audi A6 2019</div>
+    </div>
+    <div class="car-card" onclick="location.href='car3.html'">
+      <img src="car3.jpg" alt="Ford Mustang" />
+      <div class="info">Ford Mustang 2020</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-box">
       <i class="fas fa-star"></i>
-      Dlaczego warto nas wybrać?
+      <div>Dlaczego my?</div>
+      <p>Najdokładniejsze dane aukcyjne</p>
     </div>
-    <div class="panel red">
+    <div class="feature-box">
       <i class="fas fa-database"></i>
-      Usuniętych historii: 1044
+      <div>Sprawdzone wpisy</div>
+      <div class="counter">+3,204 usunięte</div>
     </div>
-    <div class="panel green">
-      <i class="fas fa-language"></i>
-      Działa w 4 językach
+    <div class="feature-box">
+      <i class="fas fa-lock"></i>
+      <div>Prywatność</div>
+      <p>Twoje dane są bezpieczne</p>
     </div>
   </div>
 
+  <footer>
+    © 2025 AutoArchive. Wszelkie prawa zastrzeżone.
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      // Placeholder – można dodać przełącznik jasnego/ciemnego motywu
+      alert("Tryb ciemny/jasny dostępny w wersji premium 😎");
+    }
+  </script>
 </body>
 </html>
