@@ -1,0 +1,61 @@
+
+body {
+  background-color: #111;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+.nav a {
+  color: #fff;
+  margin: 0 1rem;
+  text-decoration: none;
+}
+.settings {
+  display: flex;
+  gap: 0.5rem;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.cars {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+.car-card {
+  text-align: center;
+}
+.car-card img {
+  width: 200px;
+  border-radius: 8px;
+}
+.info-panels {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem 1rem;
+}
+.panel {
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.red { background: #c0392b; }
+.blue { background: #2980b9; }
+.green { background: #27ae60; }
