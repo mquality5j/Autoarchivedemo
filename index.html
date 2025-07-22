@@ -1,228 +1,187 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AutoArchive</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
-      background: #111;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 20px 40px;
-      background: transparent;
+      align-items: center;
+      padding: 30px 40px;
+      background-color: #0a0a0a;
     }
+
     .logo {
-      font-size: 32px;
+      font-size: 42px;
       font-weight: bold;
       color: #fff;
-      animation: slideIn 1s ease-out;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: slideLeft 1s ease;
     }
-    @keyframes slideIn {
-      from {transform: translateX(-100px); opacity: 0;}
-      to {transform: translateX(0); opacity: 1;}
-    }
-    .menu {
+
+    nav {
       display: flex;
-      gap: 20px;
       align-items: center;
+      gap: 30px;
     }
-    .menu a {
-      color: #aaa;
+
+    nav a {
+      color: #fff;
       text-decoration: none;
-      font-size: 16px;
-      transition: 0.3s;
+      font-size: 18px;
+      transition: color 0.3s;
     }
-    .menu a:hover {
-      color: #fff;
+
+    nav a:hover {
+      color: #00bfff;
     }
-    .controls {
+
+    .mode-lang {
       display: flex;
-      align-items: center;
       gap: 10px;
-      background: #222;
-      padding: 6px 12px;
-      border-radius: 6px;
+      margin-left: 20px;
     }
-    .hero {
+
+    .mode-lang select {
+      padding: 5px 10px;
+      background-color: #1a1a1a;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 5px;
+    }
+
+    main {
       text-align: center;
-      padding: 60px 20px 30px;
+      padding: 40px 20px;
     }
-    .hero h1 {
-      font-size: 40px;
-      color: #fff;
+
+    h1 {
+      font-size: 38px;
       margin-bottom: 20px;
+      color: #fff;
     }
-    .search-bar {
+
+    .search-container {
       display: flex;
       justify-content: center;
+      margin-bottom: 50px;
       gap: 10px;
-      margin-bottom: 60px;
     }
-    input[type="text"] {
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
+
+    .search-container input {
+      padding: 12px 18px;
       width: 300px;
-      background: #222;
-      color: #fff;
-    }
-    button {
-      padding: 12px 20px;
-      background: #0d6efd;
-      color: #fff;
+      border-radius: 5px;
       border: none;
-      border-radius: 6px;
+    }
+
+    .search-container button {
+      padding: 12px 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
-      transition: 0.3s;
     }
-    button:hover {
-      background: #0b5ed7;
-    }
-    .car-grid {
+
+    .car-gallery {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
       padding: 0 20px;
     }
+
     .car-card {
-      background: #1a1a1a;
+      background-color: #1a1a1a;
       border-radius: 10px;
       overflow: hidden;
       width: 300px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-      transition: 0.3s;
+      text-align: center;
+      transition: transform 0.3s;
     }
+
     .car-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+      transform: scale(1.05);
     }
+
     .car-card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
-    .car-card .info {
-      padding: 15px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .features {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 60px 20px;
-    }
-    .feature-box {
-      background: #222;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      width: 300px;
+
+    .car-card p {
+      padding: 10px;
+      font-size: 18px;
       color: #fff;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
-    .feature-box:hover {
-      background: #1d1d1d;
-      transform: translateY(-5px);
-    }
-    .feature-box i {
-      font-size: 36px;
-      margin-bottom: 15px;
-      color: #ff4757;
-    }
-    .counter {
-      font-size: 24px;
-      font-weight: bold;
-      color: #0f0;
-      margin-top: 10px;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 14px;
-      color: #666;
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">AutoArchive</div>
-    <div class="menu">
+    <nav>
       <a href="#">O nas</a>
       <a href="#">Kontakt</a>
-      <div class="controls">
+      <div class="mode-lang">
         <select>
-          <option>PL</option>
-          <option>EN</option>
-          <option>DE</option>
+          <option value="dark">Ciemny</option>
+          <option value="light">Jasny</option>
         </select>
-        <button onclick="toggleTheme()">🌓</button>
+        <select>
+          <option value="pl">PL</option>
+          <option value="en">EN</option>
+          <option value="de">DE</option>
+          <option value="ru">RU</option>
+        </select>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <div class="hero">
+  <main>
     <h1>Wyszukaj samochód</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Wprowadź VIN">
+    <div class="search-container">
+      <input type="text" placeholder="Wprowadź numer VIN">
       <button>Szukaj</button>
     </div>
-  </div>
 
-  <div class="car-grid">
-    <div class="car-card" onclick="location.href='car1.html'">
-      <img src="car1.jpg" alt="BMW 530xi" />
-      <div class="info">BMW 530xi 2017</div>
+    <div class="car-gallery">
+      <a href="car1.html" class="car-card">
+        <img src="img/car1.jpg" alt="BMW 530xi">
+        <p>BMW 530xi - 2019</p>
+      </a>
+      <a href="car2.html" class="car-card">
+        <img src="img/car2.jpg" alt="Audi A6">
+        <p>Audi A6 - 2020</p>
+      </a>
+      <a href="car3.html" class="car-card">
+        <img src="img/car3.jpg" alt="Mercedes E200">
+        <p>Mercedes E200 - 2021</p>
+      </a>
     </div>
-    <div class="car-card" onclick="location.href='car2.html'">
-      <img src="car2.jpg" alt="Audi A6" />
-      <div class="info">Audi A6 2019</div>
-    </div>
-    <div class="car-card" onclick="location.href='car3.html'">
-      <img src="car3.jpg" alt="Ford Mustang" />
-      <div class="info">Ford Mustang 2020</div>
-    </div>
-  </div>
-
-  <div class="features">
-    <div class="feature-box">
-      <i class="fas fa-star"></i>
-      <div>Dlaczego my?</div>
-      <p>Najdokładniejsze dane aukcyjne</p>
-    </div>
-    <div class="feature-box">
-      <i class="fas fa-database"></i>
-      <div>Sprawdzone wpisy</div>
-      <div class="counter">+3,204 usunięte</div>
-    </div>
-    <div class="feature-box">
-      <i class="fas fa-lock"></i>
-      <div>Prywatność</div>
-      <p>Twoje dane są bezpieczne</p>
-    </div>
-  </div>
-
-  <footer>
-    © 2025 AutoArchive. Wszelkie prawa zastrzeżone.
-  </footer>
-
-  <script>
-    function toggleTheme() {
-      // Placeholder – można dodać przełącznik jasnego/ciemnego motywu
-      alert("Tryb ciemny/jasny dostępny w wersji premium 😎");
-    }
-  </script>
+  </main>
 </body>
 </html>
