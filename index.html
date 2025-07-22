@@ -1,42 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AutoArchive UltraPro</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoArchive - UltraPro</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="logo">AutoArchive</div>
-    <nav class="nav">
-      <a href="#">O nas</a>
-      <a href="#">Kontakt</a>
-      <div class="settings">
-        <button id="theme-toggle">🌙</button>
-        <select id="language-select">
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-        </select>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <h1>Wyszukaj samochód</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Wpisz numer VIN" />
-      <button>Szukaj</button>
-    </div>
-    <section class="cars">
-      <div class="car-card"><img src="car1.jpg"><p>BMW 530xi 2020</p></div>
-      <div class="car-card"><img src="car2.jpg"><p>Audi A6 2019</p></div>
-      <div class="car-card"><img src="car3.jpg"><p>Toyota Camry 2021</p></div>
-    </section>
-    <section class="info-panels">
-      <div class="panel red">Dlaczego warto nas wybrać?</div>
-      <div class="panel blue">2 543 usunięte wpisy</div>
-      <div class="panel green">Szybki proces online</div>
-    </section>
-  </main>
+    <header>
+        <div class="logo">AutoArchive</div>
+        <nav>
+            <a href="#">O nas</a>
+            <a href="#">Kontakt</a>
+            <div class="controls">
+                <button>🌙</button>
+                <select>
+                    <option>PL</option>
+                    <option>EN</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Wyszukaj samochód</h1>
+        <input type="text" placeholder="Wprowadź VIN" />
+        <button>Szukaj</button>
+        <section class="cars">
+            <div class="car"><img src="car1.jpg" /><p>BMW 530xi 2021</p></div>
+            <div class="car"><img src="car2.jpg" /><p>Audi A6 2020</p></div>
+            <div class="car"><img src="car3.jpg" /><p>Mercedes C200 2019</p></div>
+        </section>
+        <section class="panels">
+            <div class="panel">Dlaczego warto nas wybrać?</div>
+            <div class="panel">Licznik: 5125 usuniętych wpisów</div>
+            <div class="panel">Szybko, tanio i skutecznie</div>
+        </section>
+    </main>
 </body>
 </html>
