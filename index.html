@@ -1,78 +1,70 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AutoArchive</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-<body class="dark-mode">
-  <header>
+<body class="dark">
+  <header class="header">
     <div class="logo-container">
-      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo">
+      <img src="DCEFD878-CC39-44F5-8FEB-34954928928E.png" alt="AutoArchive Logo" class="logo" />
     </div>
-    <nav>
+    <nav class="nav">
       <a href="#">O nas</a>
       <a href="#">Kontakt</a>
-      <div class="controls">
-        <button id="theme-toggle">🌙</button>
-        <select id="language-select">
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-        </select>
-      </div>
     </nav>
+    <div class="tools">
+      <button id="toggle-theme">🌙</button>
+      <select id="language-select">
+        <option value="pl">PL</option>
+        <option value="en">EN</option>
+        <option value="de">DE</option>
+        <option value="ru">RU</option>
+      </select>
+    </div>
   </header>
 
   <main>
-    <h1>Wyszukaj samochód</h1>
-    <div class="search-container">
-      <input type="text" id="vin-search" placeholder="Wprowadź VIN">
-      <button id="search-button">Szukaj</button>
+    <h1 class="main-title">Wyszukaj samochód</h1>
+    <div class="search-bar">
+      <input type="text" id="vinInput" placeholder="Wpisz VIN" />
+      <button id="searchBtn">Szukaj</button>
     </div>
 
-    <section class="car-grid">
+    <div class="car-gallery">
       <div class="car-card" onclick="location.href='car1.html'">
-        <img src="car1-thumb.jpg" alt="BMW 530xi">
-        <h3>BMW 530xi</h3>
-        <p>VIN: WBANB73557CX12345</p>
-        <p>Rok: 2007</p>
+        <img src="car1.jpg" alt="BMW 530xi" />
+        <p>BMW 530xi (2020)</p>
       </div>
       <div class="car-card" onclick="location.href='car2.html'">
-        <img src="car2-thumb.jpg" alt="Audi A6">
-        <h3>Audi A6</h3>
-        <p>VIN: WAUZZZ4G9GN123456</p>
-        <p>Rok: 2016</p>
+        <img src="car2.jpg" alt="Audi A6" />
+        <p>Audi A6 (2019)</p>
       </div>
-      <div class="car-card" onclick="location.href='car3.html'">
-        <img src="car3-thumb.jpg" alt="Mercedes C200">
-        <h3>Mercedes C200</h3>
-        <p>VIN: WDD2040481A123456</p>
-        <p>Rok: 2012</p>
+      <div class="car-card" onclick="location.href='car3.jpg'">
+        <img src="car3.jpg" alt="Mercedes C-Class" />
+        <p>Mercedes C-Class (2021)</p>
       </div>
-    </section>
-
-    <section class="info-boxes">
-      <div class="info-box">
-        <h2>Dlaczego AutoArchive?</h2>
-        <p>Szybki dostęp do historii pojazdów z USA.</p>
-      </div>
-      <div class="info-box">
-        <h2>+5470</h2>
-        <p>usuniętych historii</p>
-      </div>
-      <div class="info-box">
-        <h2>Zaufanie</h2>
-        <p>Sprawdź pojazd zanim go kupisz</p>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <footer>
-    <p>&copy; 2025 AutoArchive. Wszelkie prawa zastrzeżone.</p>
-  </footer>
+  <script>
+    // Tryb jasny/ciemny
+    const toggleTheme = document.getElementById("toggle-theme");
+    const body = document.body;
+    toggleTheme.addEventListener("click", () => {
+      body.classList.toggle("dark");
+    });
+
+    // Wyszukiwanie VIN
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const vin = document.getElementById("vinInput").value.toLowerCase();
+      if (vin.includes("car1")) location.href = "car1.html";
+      else if (vin.includes("car2")) location.href = "car2.html";
+      else if (vin.includes("car3")) location.href = "car3.html";
+      else alert("Nie znaleziono pojazdu o takim VIN.");
+    });
+  </script>
 </body>
 </html>
