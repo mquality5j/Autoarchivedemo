@@ -6,198 +6,256 @@
   <title>AutoArchive</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-color: #0d1117;
+      --text-color: white;
+      --panel-color: #1c1f26;
+      --accent-color: #f04336;
+    }
+
+    body.light {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --panel-color: #f0f0f0;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(160deg, #0d1117, #1c1f26);
-      color: white;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
     }
+
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background-color: #0d1117;
-      border-bottom: 1px solid #222;
+      padding: 20px;
+      background-color: var(--bg-color);
+      flex-wrap: wrap;
     }
+
     .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      color: #f04336;
+      font-size: 26px;
+      color: var(--accent-color);
     }
+
     nav {
       display: flex;
-      align-items: center;
-      gap: 25px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    nav a {
+
+    nav a, .switches select {
+      color: var(--text-color);
+      background: none;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
       text-decoration: none;
-      color: #ccc;
-      font-weight: 500;
-      transition: color 0.3s;
     }
-    nav a:hover {
-      color: #fff;
+
+    .switches {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
+
     .hero {
       text-align: center;
-      padding: 80px 20px 40px;
+      padding: 60px 20px 20px;
     }
+
     .hero h1 {
-      font-size: 38px;
-      margin-bottom: 10px;
+      font-size: 32px;
     }
-    .hero p {
-      font-size: 18px;
-      color: #aaa;
-    }
+
     .search-box {
-      margin: 40px auto;
-      max-width: 600px;
       display: flex;
+      max-width: 600px;
+      margin: 30px auto;
     }
+
     .search-box input {
       flex: 1;
       padding: 15px;
-      font-size: 16px;
       border: none;
       border-radius: 6px 0 0 6px;
-      outline: none;
     }
+
     .search-box button {
-      padding: 15px 30px;
-      background-color: #f04336;
-      color: white;
+      padding: 15px 25px;
       border: none;
-      font-size: 16px;
-      font-weight: 600;
+      background-color: var(--accent-color);
+      color: white;
       border-radius: 0 6px 6px 0;
-      cursor: pointer;
+      font-weight: 600;
     }
+
     .vehicles {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
-      padding: 40px;
+      padding: 20px;
     }
+
     .car-card {
-      background: #1c1f26;
+      background-color: var(--panel-color);
       border-radius: 10px;
-      overflow: hidden;
       width: 300px;
       transition: transform 0.3s;
     }
-    .car-card:hover {
-      transform: scale(1.03);
-    }
+
     .car-card img {
       width: 100%;
+      border-radius: 10px 10px 0 0;
       height: 180px;
       object-fit: cover;
     }
-    .car-card .info {
+
+    .car-card:hover {
+      transform: scale(1.03);
+    }
+
+    .info {
       padding: 15px;
     }
-    .car-card .info h3 {
+
+    .info h3 {
       margin: 0 0 5px;
     }
+
     .panels {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin: 60px 20px;
-      flex-wrap: wrap;
+      padding: 30px;
     }
+
     .panel {
-      flex: 1;
-      min-width: 280px;
-      max-width: 340px;
-      background-color: #262a34;
-      padding: 25px;
+      background-color: var(--panel-color);
+      padding: 20px;
       border-radius: 10px;
+      width: 300px;
       text-align: center;
-      transition: background-color 0.3s;
     }
-    .panel:hover {
-      background-color: #313641;
-    }
-    .panel h4 {
-      margin-bottom: 10px;
-      color: #f04336;
-    }
+
     footer {
       text-align: center;
-      padding: 30px 20px;
-      color: #666;
-      background: #0d1117;
+      padding: 20px;
+      background-color: var(--bg-color);
       border-top: 1px solid #222;
+    }
+
+    @media (max-width: 768px) {
+      header, nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box input,
+      .search-box button {
+        width: 100%;
+        border-radius: 6px;
+        margin: 5px 0;
+      }
+
+      .vehicles {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">AutoArchive</div>
-    <nav>
-      <a href="#">O nas</a>
-      <a href="#">Kontakt</a>
-      <a href="#">Tryb</a>
-      <a href="#">Język</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">AutoArchive</div>
+  <nav>
+    <a href="#">O nas</a>
+    <a href="#">Kontakt</a>
+  </nav>
+  <div class="switches">
+    <select id="language-switcher">
+      <option value="pl">PL</option>
+      <option value="en">EN</option>
+    </select>
+    <select id="mode-switcher">
+      <option value="dark">Ciemny</option>
+      <option value="light">Jasny</option>
+    </select>
+  </div>
+</header>
 
-  <section class="hero">
-    <h1>Usuń historię swojego auta</h1>
-    <p>Sprawdź i wyczyść wpisy VIN w prosty sposób</p>
-    <div class="search-box">
-      <input type="text" placeholder="Wprowadź numer VIN">
-      <button>Szukaj</button>
-    </div>
-  </section>
+<section class="hero">
+  <h1 id="main-title">Wyszukaj historię pojazdu</h1>
+  <div class="search-box">
+    <input type="text" placeholder="Wprowadź VIN">
+    <button id="searchBtn">Szukaj</button>
+  </div>
+</section>
 
-  <section class="vehicles">
-    <div class="car-card">
-      <img src="https://via.placeholder.com/300x180?text=BMW+530xi" alt="BMW">
-      <div class="info">
-        <h3>BMW 530xi 2021</h3>
-        <p>Uszkodzenia: Tył</p>
-      </div>
+<section class="vehicles">
+  <div class="car-card">
+    <img src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX292/15317eeb-04c8-442e-a88f-9ae7081b7151.JPG" alt="BMW 530xi">
+    <div class="info">
+      <h3>BMW 530xi 2021</h3>
+      <p>Uszkodzenia: Rear End</p>
     </div>
-    <div class="car-card">
-      <img src="https://via.placeholder.com/300x180?text=Audi+A6" alt="Audi">
-      <div class="info">
-        <h3>Audi A6 2020</h3>
-        <p>Uszkodzenia: Bok</p>
-      </div>
-    </div>
-    <div class="car-card">
-      <img src="https://via.placeholder.com/300x180?text=Honda+Accord" alt="Honda">
-      <div class="info">
-        <h3>Honda Accord 2019</h3>
-        <p>Uszkodzenia: Przód</p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <section class="panels">
-    <div class="panel">
-      <h4>Dlaczego my?</h4>
-      <p>Legalne czyszczenie VIN, bezpieczne płatności, profesjonalna obsługa.</p>
-    </div>
-    <div class="panel">
-      <h4>Licznik</h4>
-      <p>🔍 12 849 historii usuniętych!</p>
-    </div>
-    <div class="panel">
-      <h4>Korzyści</h4>
-      <p>Szybka obsługa, pomoc techniczna, przejrzysty interfejs.</p>
-    </div>
-  </section>
+<section class="panels">
+  <div class="panel">
+    <h4>Dlaczego my?</h4>
+    <p>Szybka analiza VIN, bezpieczne płatności, legalność działań</p>
+  </div>
+  <div class="panel">
+    <h4>Licznik</h4>
+    <p>15 392 historii usuniętych</p>
+  </div>
+  <div class="panel">
+    <h4>Korzyści</h4>
+    <p>Pomoc 24/7, prosty interfejs, wysoka skuteczność</p>
+  </div>
+</section>
 
-  <footer>
-    © 2025 AutoArchive. Wszystkie prawa zastrzeżone.
-  </footer>
+<footer>
+  &copy; 2025 AutoArchive. Wszelkie prawa zastrzeżone.
+</footer>
+
+<script>
+  const langSwitcher = document.getElementById('language-switcher');
+  const modeSwitcher = document.getElementById('mode-switcher');
+  const title = document.getElementById('main-title');
+  const searchBtn = document.getElementById('searchBtn');
+
+  langSwitcher.addEventListener('change', () => {
+    if (langSwitcher.value === 'en') {
+      title.textContent = "Search Vehicle History";
+      searchBtn.textContent = "Search";
+    } else {
+      title.textContent = "Wyszukaj historię pojazdu";
+      searchBtn.textContent = "Szukaj";
+    }
+  });
+
+  modeSwitcher.addEventListener('change', () => {
+    if (modeSwitcher.value === 'light') {
+      document.body.classList.add('light');
+    } else {
+      document.body.classList.remove('light');
+    }
+  });
+</script>
 
 </body>
 </html>
