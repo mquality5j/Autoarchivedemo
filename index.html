@@ -16,40 +16,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 25px 40px;
+      padding: 20px 40px;
       background-color: #0c0c0c;
-      flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 42px;
+      font-size: 38px;
       font-weight: bold;
-      color: #ffffff;
-      text-transform: uppercase;
+      color: white;
     }
 
-    .nav-right {
+    .header-right {
       display: flex;
+      gap: 20px;
       align-items: center;
-      gap: 25px;
     }
 
-    .nav-right a {
+    .header-right a {
       color: white;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
     }
 
-    .mode-lang {
-      display: flex;
-      gap: 10px;
-    }
-
-    .mode-lang select {
-      padding: 5px 10px;
+    .header-right select {
       background-color: #1a1a1a;
       color: white;
       border: 1px solid #333;
+      padding: 5px 10px;
       border-radius: 5px;
     }
 
@@ -59,7 +52,7 @@
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 34px;
       margin-bottom: 30px;
     }
 
@@ -89,8 +82,8 @@
     .car-gallery {
       display: flex;
       justify-content: center;
-      gap: 30px;
       flex-wrap: nowrap;
+      gap: 30px;
       overflow-x: auto;
       padding: 0 20px;
       margin-bottom: 60px;
@@ -99,9 +92,9 @@
     .car-card {
       background-color: #1a1a1a;
       border-radius: 10px;
-      overflow: hidden;
       width: 280px;
       min-width: 280px;
+      overflow: hidden;
       text-align: center;
       transition: transform 0.3s;
     }
@@ -158,6 +151,11 @@
       .car-gallery {
         flex-wrap: wrap;
       }
+
+      .header-right {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
     }
   </style>
 </head>
@@ -165,21 +163,19 @@
 
   <header>
     <div class="logo">AutoArchive</div>
-    <div class="nav-right">
+    <div class="header-right">
       <a href="#">O nas</a>
       <a href="#">Kontakt</a>
-      <div class="mode-lang">
-        <select>
-          <option value="dark">Ciemny</option>
-          <option value="light">Jasny</option>
-        </select>
-        <select>
-          <option value="pl">PL</option>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="ru">RU</option>
-        </select>
-      </div>
+      <select>
+        <option value="dark">Ciemny</option>
+        <option value="light">Jasny</option>
+      </select>
+      <select>
+        <option value="pl">PL</option>
+        <option value="en">EN</option>
+        <option value="de">DE</option>
+        <option value="ru">RU</option>
+      </select>
     </div>
   </header>
 
